@@ -2,7 +2,7 @@ package com.example.WebProjekat.model;
 
 import org.hibernate.annotations.CollectionId;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 

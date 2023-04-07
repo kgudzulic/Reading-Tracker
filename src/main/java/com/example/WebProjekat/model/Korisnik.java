@@ -34,6 +34,6 @@ public class Korisnik implements Serializable {
     @Column
     private String opis;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Uloga uloga;
 }

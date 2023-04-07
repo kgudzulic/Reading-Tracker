@@ -2,6 +2,9 @@ package com.example.WebProjekat.model;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Polica implements Serializable {
     @Id
@@ -15,4 +18,10 @@ public class Polica implements Serializable {
     private Boolean primarna;
 
 
+    //prvi deo many to many tabele izmedju stavki police i same police
+    @ManyToMany
+    @jakarta.persistence.JoinTable(name = "pripada",
+            joinColumns = @jakarta.persistence.JoinColumn(name = "polica_id", referencedColumnName = "id"),
+            inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "stavkaPolice_id", referencedColumnName = "id"))
+    private Set<StavkaPolice> stavkePolice = new HashSet<>();
 }

@@ -23,7 +23,7 @@ public class Korisnik implements Serializable {
     private String email;
 
     @Column
-    private String password;
+    private String lozinka;
 
     @Column
     private Date datumRodjenja;
@@ -34,6 +34,6 @@ public class Korisnik implements Serializable {
     @Column
     private String opis;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Uloga uloga;
 }

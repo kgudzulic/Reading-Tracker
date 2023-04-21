@@ -1,4 +1,6 @@
 package com.example.WebProjekat.repository;
 
-public interface StavkaPoliceRepository {
+import com.example.WebProjekat.model.StavkaPolice;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface StavkaPoliceRepository extends JpaRepository<StavkaPolice, Long>{
 }

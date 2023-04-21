@@ -3,6 +3,8 @@ package com.example.WebProjekat.model;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Korisnik implements Serializable {
@@ -36,4 +38,7 @@ public class Korisnik implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Uloga uloga;
+
+    @OneToMany(mappedBy = "korisnik", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Polica> police = new HashSet<>();
 }

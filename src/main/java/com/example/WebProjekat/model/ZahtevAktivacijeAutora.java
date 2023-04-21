@@ -24,4 +24,7 @@ public class ZahtevAktivacijeAutora implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private StatusAktivacije statusAktivacije;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Autor autor;
 }

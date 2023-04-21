@@ -18,7 +18,7 @@ public class Korisnik implements Serializable {
     @Column
     private String prezime;
 
-    @Column(unique = true)
+    @Column(unique = true, name = "korisnicko_ime")
     private String korisnickoIme;
 
     @Column(unique = true)
@@ -27,7 +27,7 @@ public class Korisnik implements Serializable {
     @Column
     private String lozinka;
 
-    @Column
+    @Column(name = "datum_rodjenja")
     private Date datumRodjenja;
 
     /*@Column

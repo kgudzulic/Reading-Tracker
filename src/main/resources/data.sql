@@ -18,4 +18,3 @@ INSERT INTO KNJIGA (naslov, /*naslovnaFotografija, */ISBN, datum_objavljivanja, 
 INSERT INTO ULOGA (naziv) VALUES ('citalac');
 INSERT INTO ULOGA (naziv) VALUES ('autor');
 INSERT INTO ULOGA (naziv) VALUES ('administrator');
-

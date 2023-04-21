@@ -21,10 +21,10 @@ public class Knjiga implements Serializable {
     @Column(unique = true)
     private String ISBN;
 
-    @Column
+    @Column(name = "datum_objavljivanja")
     private Date datumObjavljivanja;
 
-    @Column
+    @Column(name = "broj_strana")
     private Long brojStrana;
 
     @Column
@@ -33,8 +33,8 @@ public class Knjiga implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Zanr zanr;
 
-    @Column
-    private Long srednjaOcena;
+    @Column(name = "srednja_ocena")
+    private Float srednjaOcena;
 
     public Long getId() {
         return id;
@@ -92,11 +92,11 @@ public class Knjiga implements Serializable {
         this.zanr = zanr;
     }
 
-    public Long getSrednjaOcena() {
+    public Float getSrednjaOcena() {
         return srednjaOcena;
     }
 
-    public void setSrednjaOcena(Long srednjaOcena) {
+    public void setSrednjaOcena(Float srednjaOcena) {
         this.srednjaOcena = srednjaOcena;
     }
 }

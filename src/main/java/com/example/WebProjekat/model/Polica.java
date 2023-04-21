@@ -26,5 +26,5 @@ public class Polica implements Serializable {
     private Set<StavkaPolice> stavkePolice = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Korisnik korisnik_id;
+    private Korisnik korisnik;
 }

@@ -8,3 +8,6 @@ INSERT INTO ZANR (naziv) VALUES ('Naucna fantastika');
 INSERT INTO ZANR (naziv) VALUES ('Psiholoski');
 INSERT INTO ZANR (naziv) VALUES ('Poezija');
 
+INSERT INTO STATUSAKTIVACIJE (naziv) VALUES ('na cekanju');
+INSERT INTO STATUSAKTIVACIJE (naziv) VALUES ('odobren');
+INSERT INTO STATUSAKTIVACIJE (naziv) VALUES ('odbijen');

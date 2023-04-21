@@ -19,7 +19,7 @@ public class Knjiga implements Serializable {
     private Object naslovnaFotografija;
 
     @Column(unique = true)
-    private Long ISBN;
+    private String ISBN;
 
     @Column
     private Date datumObjavljivanja;

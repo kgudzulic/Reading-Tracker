@@ -13,6 +13,6 @@ public class Autor extends Korisnik implements Serializable {
     @Column
     private Boolean aktivan;
 
-    @OneToMany(mappedBy = "autor", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Knjiga> spisakKnjiga = new HashSet<>();
 }

@@ -12,7 +12,7 @@ public class StavkaPolice implements Serializable {
     private Long id;
 
     //stavka police ima vise recenzija, znaci 1:M veza
-    @OneToMany(mappedBy = "stavkaPolice", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Recenzija> recenzije = new HashSet<>();
 
     //jedna stavka police karakterise jednu knjigu tj 1:1 veza

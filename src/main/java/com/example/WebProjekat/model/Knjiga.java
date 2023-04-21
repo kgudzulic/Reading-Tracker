@@ -15,8 +15,8 @@ public class Knjiga implements Serializable {
     @Column
     private String naslov;
 
-    @Column
-    private Object naslovnaFotografija;
+    /*@Column
+    private Object naslovnaFotografija;*/
 
     @Column(unique = true)
     private String ISBN;
@@ -35,4 +35,68 @@ public class Knjiga implements Serializable {
 
     @Column
     private Long srednjaOcena;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNaslov() {
+        return naslov;
+    }
+
+    public void setNaslov(String naslov) {
+        this.naslov = naslov;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public Date getDatumObjavljivanja() {
+        return datumObjavljivanja;
+    }
+
+    public void setDatumObjavljivanja(Date datumObjavljivanja) {
+        this.datumObjavljivanja = datumObjavljivanja;
+    }
+
+    public Long getBrojStrana() {
+        return brojStrana;
+    }
+
+    public void setBrojStrana(Long brojStrana) {
+        this.brojStrana = brojStrana;
+    }
+
+    public String getOpis() {
+        return opis;
+    }
+
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public Zanr getZanr() {
+        return zanr;
+    }
+
+    public void setZanr(Zanr zanr) {
+        this.zanr = zanr;
+    }
+
+    public Long getSrednjaOcena() {
+        return srednjaOcena;
+    }
+
+    public void setSrednjaOcena(Long srednjaOcena) {
+        this.srednjaOcena = srednjaOcena;
+    }
 }

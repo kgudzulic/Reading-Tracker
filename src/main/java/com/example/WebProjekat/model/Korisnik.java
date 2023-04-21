@@ -30,8 +30,8 @@ public class Korisnik implements Serializable {
     @Column
     private Date datumRodjenja;
 
-    @Column
-    private Object profilnaSlika;
+    /*@Column
+    private Object profilnaSlika;*/
 
     @Column
     private String opis;
@@ -39,6 +39,6 @@ public class Korisnik implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Uloga uloga;
 
-    @OneToMany(mappedBy = "korisnik", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Polica> police = new HashSet<>();
 }

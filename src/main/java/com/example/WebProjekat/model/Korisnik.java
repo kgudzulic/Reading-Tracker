@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +31,8 @@ public class Korisnik implements Serializable {
     @Column(name = "datum_rodjenja")
     private Date datumRodjenja;
 
-    /*@Column
-    private Object profilnaSlika;*/
+    @Column
+    private String profilnaSlika;
 
     @Column
     private String opis;
@@ -41,4 +42,29 @@ public class Korisnik implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Polica> police = new HashSet<>();
+
+    public Korisnik(String ime, String prezime) {
+        this.ime = ime;
+        this.prezime = prezime;
+    }
+
+    @Override
+    public String toString() {
+        return "Korisnik{" +
+                "id=" + id +
+                ", ime='" + ime + '\'' +
+                ", prezime='" + prezime + '\'' +
+                ", korisnickoIme='" + korisnickoIme + '\'' +
+                ", email='" + email + '\'' +
+                ", lozinka='" + lozinka + '\'' +
+                ", datumRodjenja=" + datumRodjenja +
+                ", profilnaSlika='" + profilnaSlika + '\'' +
+                ", opis='" + opis + '\'' +
+                ", uloga=" + uloga +
+                ", police=" + police +
+                '}';
+    }
+
+    public Korisnik() {
+    }
 }

@@ -11,7 +11,7 @@ public class Recenzija implements Serializable {
     private Long id;
 
     @Column
-    private Long ocena;
+    private Integer ocena;
 
     @Column
     private String tekst;

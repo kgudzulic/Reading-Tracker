@@ -11,12 +11,10 @@ public class StavkaPolice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //stavka police ima vise recenzija, znaci 1:M veza
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Recenzija> recenzije = new HashSet<>();
-
-    //jedna stavka police karakterise jednu knjigu tj 1:1 veza
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Recenzija recenzija;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Knjiga knjiga;
 
     /*

@@ -19,6 +19,5 @@ INSERT INTO ULOGA (naziv) VALUES ('citalac');
 INSERT INTO ULOGA (naziv) VALUES ('autor');
 INSERT INTO ULOGA (naziv) VALUES ('administrator');
 
-
 INSERT INTO KORISNIK (dtype, ime, prezime) VALUES ('CITALAC', 'Pera', 'Peric');
-INSERT INTO KORISNIK (dtype, ime, prezime) VALUES ('AUTOR', 'Mara', 'Maric');
+INSERT INTO KORISNIK (dtype, ime, prezime) VALUES ('CITALAC', 'Mara', 'Maric');

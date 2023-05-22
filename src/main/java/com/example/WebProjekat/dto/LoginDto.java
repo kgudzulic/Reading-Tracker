@@ -1,31 +1,31 @@
 package com.example.WebProjekat.dto;
 
 public class LoginDto {
-    private String username;
+    private String korisnickoIme;
 
-    private String password;
+    private String lozinka;
 
     public LoginDto() {
     }
 
-    public LoginDto(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public LoginDto(String korisnickoIme, String lozinka) {
+        this.korisnickoIme = korisnickoIme;
+        this.lozinka = lozinka;
     }
 
-    public String getUsername() {
-        return username;
+    public String getKorisnickoIme() {
+        return korisnickoIme;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLozinka() {
+        return lozinka;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLozinka(String lozinka) {
+        this.lozinka = lozinka;
     }
 }

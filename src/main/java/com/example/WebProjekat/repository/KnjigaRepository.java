@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface KnjigaRepository extends JpaRepository<Knjiga, Long>{
-    List<Knjiga> findAllByNaslovOrOrderById(String naslov);
+    List<Knjiga> findAllByNaslovOrderById(String naslov);
     List<Knjiga> findAllByOpisOrderById(String opis);
 }
 

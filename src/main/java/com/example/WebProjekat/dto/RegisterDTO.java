@@ -5,15 +5,16 @@ import com.example.WebProjekat.model.Uloga;
 import java.util.Date;
 
 public class RegisterDTO {
-    private String korisnickoIme;
-
-    private String lozinka;
 
     private String ime;
 
     private String prezime;
 
+    private String korisnickoIme;
+
     private String email;
+
+    private String lozinka;
 
     private Date datumRodjenja = new Date();
 

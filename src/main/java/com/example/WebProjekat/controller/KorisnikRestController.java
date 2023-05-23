@@ -105,7 +105,7 @@ public class KorisnikRestController {
     }
 
     //Pretraga knjiga od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-knjiga/pretraga")
+    @PostMapping("/api/pregled-knjiga/pretraga-po-naslovu")
     public ResponseEntity<List<Knjiga>> pretragaKnjigaPoNaslovu(HttpSession session) {
         String pretragaKnjige = new String();
         List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByNaslovOrderById(pretragaKnjige);
@@ -115,7 +115,7 @@ public class KorisnikRestController {
     //Pregled profila drugih korisnika od strane neregistrovanog korisnika
     @PostMapping("/api/pregled-profila")
     public ResponseEntity<List<Korisnik>> prikaziKorisnika(HttpSession session) {
-        List<Korisnik> sviKorisnici = korisnikService.getAll();
+        List<Korisnik> sviKorisnici = korisnikService.findAll();
         return ResponseEntity.ok(sviKorisnici);
     }
 
@@ -128,7 +128,7 @@ public class KorisnikRestController {
     }
 
     //Pretraga knjiga po zanru od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-knjiga/pretraga")
+    @PostMapping("/api/pregled-knjiga/pretraga-po-zanru")
     public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(HttpSession session) {
         String pretragaKnjige = new String();
         List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByZanrOrderById(pretragaKnjige);

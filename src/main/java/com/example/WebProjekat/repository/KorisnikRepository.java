@@ -2,10 +2,13 @@ package com.example.WebProjekat.repository;
 
 import com.example.WebProjekat.model.Korisnik;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long>{
     Korisnik findAllByKorisnickoImeOrderByIme(String korisnickoIme);
 
     Korisnik getBykorisnickoIme(String korisnickoIme);
 
-    Korisnik getALL();
+    List<Korisnik> findAll();
 }

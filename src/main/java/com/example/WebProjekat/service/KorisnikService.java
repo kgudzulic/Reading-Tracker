@@ -28,7 +28,7 @@ public class KorisnikService {
         return korisnikRepository.findAll();
     }
 
-    /*public List<Korisnik> findByKorisnickoImeOrderByIme(String string) {
-        return korisnikRepository.findByKorisnickoImeOrderByIme(string);
-    }*/
+    public List<Korisnik> findAllByKorisnickoImeOrderByIme(String string) {
+        return (List<Korisnik>) korisnikRepository.findAllByKorisnickoImeOrderByIme(string);
+    }
 }

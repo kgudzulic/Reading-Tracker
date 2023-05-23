@@ -119,6 +119,14 @@ public class KorisnikRestController {
         return ResponseEntity.ok(sviKorisnici);
     }
 
+    //Pretraga korisnika od strane neregistrovanog korisnika
+    @PostMapping("/api/pregled-profila/pretraga")
+    public ResponseEntity<List<Korisnik>> pretragaKorisnikaZaNeregistrovanogKorisnika(HttpSession session) {
+        String pretragaKorisnika = new String();
+        List<Korisnik> sviKorisniciUzPretragu = korisnikService.findAllByKorisnickoImeOrderByIme(pretragaKorisnika);
+        return ResponseEntity.ok(sviKorisniciUzPretragu);
+    }
+
     //Pregled recenzija knjiga od strane neregistrovanog korisnika
 
     //Pretraga knjiga po zanru od strane neregistrovanog korisnika

@@ -1,14 +1,14 @@
 package com.example.WebProjekat.dto;
 
-public class LoginDto {
+public class LoginDTO {
     private String korisnickoIme;
 
     private String lozinka;
 
-    public LoginDto() {
+    public LoginDTO() {
     }
 
-    public LoginDto(String korisnickoIme, String lozinka) {
+    public LoginDTO(String korisnickoIme, String lozinka) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
     }

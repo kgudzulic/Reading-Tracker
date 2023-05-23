@@ -1,6 +1,6 @@
 package com.example.WebProjekat.controller;
 
-import com.example.WebProjekat.dto.LoginDto;
+import com.example.WebProjekat.dto.LoginDTO;
 import com.example.WebProjekat.dto.RegisterDTO;
 import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
@@ -72,7 +72,7 @@ public class KorisnikRestController {
 
     //Login korisnika
     @PostMapping("/api/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session) {
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDto, HttpSession session) {
         //provera ispravnosti podataka
         if(loginDto.getKorisnickoIme().isEmpty() || loginDto.getLozinka().isEmpty())
             return new ResponseEntity("Polje ne sme biti prazno!", HttpStatus.BAD_REQUEST);

@@ -1,10 +1,14 @@
 package com.example.WebProjekat.controller;
 
+import com.example.WebProjekat.dto.LoginDto;
 import com.example.WebProjekat.dto.RegisterDTO;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
 import com.example.WebProjekat.service.KorisnikService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +27,7 @@ public class KorisnikRestController {
         return "Hello from api!";
     }
 
+    //Registracija korisnika
     @PostMapping("/api/register")
     public String registrujKorisnika(@RequestBody RegisterDTO newDTO) {
 
@@ -56,7 +61,21 @@ public class KorisnikRestController {
 
         this.korisnikService.save(newKorisnik);
 
-        return "Korisnik" + newDTO.getKorisnickoIme() + "je uspesno registrovan";
+        return "Korisnik" + newDTO.getKorisnickoIme() + "je uspesno registrovan.";
     }
 
+    //Login korisnika
+    @PostMapping("api/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session) {
+        //provera ispravnosti podataka
+        if(loginDto.getKorisnickoIme().isEmpty() || loginDto.getLozinka().isEmpty())
+            return new ResponseEntity("Polje ne sme biti prazno!", HttpStatus.BAD_REQUEST);
+
+        Korisnik ulogovaniKorisnik = korisnikService.login(loginDto.getKorisnickoIme(), loginDto.getLozinka());
+        if (ulogovaniKorisnik == null)
+            return new ResponseEntity<>("Korisnik sa unetim podacima ne postoji!", HttpStatus.NOT_FOUND);
+
+        session.setAttribute("korisnik", ulogovaniKorisnik);
+        return ResponseEntity.ok("Korisnik " + ulogovaniKorisnik.getKorisnickoIme() + " je uspesno ulogovan.");
+    }
 }

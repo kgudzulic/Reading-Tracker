@@ -12,4 +12,11 @@ public class KorisnikService {
     public Korisnik save(Korisnik korisnik) {
         return korisnikRepository.save(korisnik);
     }
+
+    public Korisnik login(String korisnickoIme, String lozinka) {
+        Korisnik korisnik = korisnikRepository.getBykorisnickoIme(korisnickoIme);
+        if(korisnik == null || !korisnik.getLozinka().equals(lozinka))
+            return null;
+        return  korisnik;
+    }
 }

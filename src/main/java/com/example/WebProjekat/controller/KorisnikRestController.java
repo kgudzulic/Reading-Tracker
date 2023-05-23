@@ -2,8 +2,10 @@ package com.example.WebProjekat.controller;
 
 import com.example.WebProjekat.dto.LoginDto;
 import com.example.WebProjekat.dto.RegisterDTO;
+import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
+import com.example.WebProjekat.service.KnjigaService;
 import com.example.WebProjekat.service.KorisnikService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
 public class KorisnikRestController {
     @Autowired
     private KorisnikService korisnikService;
+
+    @Autowired
+    private KnjigaService knjigaService;
 
     @GetMapping("/api")
     public String welcome(){
@@ -90,4 +96,20 @@ public class KorisnikRestController {
         session.invalidate();
         return new ResponseEntity("Uspesno ste se izlogovali", HttpStatus.OK);
     }
+
+    //Pregled svih knjiga od strane neregistrovanog korisnika
+    @PostMapping("/api/pregled-knjiga")
+    public ResponseEntity<List<Knjiga>> prikaziKnjigeZaNeregistrovanogKorisnika(HttpSession session) {
+        List<Knjiga> sveKnjige = knjigaService.findAll();
+        return ResponseEntity.ok(sveKnjige);
+    }
+
+    //Pretraga knjiga od strane neregistrovanog korisnika
+
+
+    //Pregled profila drugih korisnika od strane neregistrovanog korisnika
+
+    //Pregled recenzija knjiga od strane neregistrovanog korisnika
+
+    //Pretraga knjiga po zanru od strane neregistrovanog korisnika
 }

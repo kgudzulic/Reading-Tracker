@@ -19,4 +19,8 @@ public class KnjigaService {
     public List<Knjiga> findAllByNaslovOrderById(String string) {
         return knjigaRepository.findAllByNaslovOrderById(string);
     }
+
+    public List<Knjiga> findAllByZanrOrderById(String string) {
+        return knjigaRepository.findAllByZanrOrderById(string);
+    }
 }

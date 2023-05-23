@@ -105,7 +105,12 @@ public class KorisnikRestController {
     }
 
     //Pretraga knjiga od strane neregistrovanog korisnika
-
+    @PostMapping("/api/pregled-knjiga/pretraga")
+    public ResponseEntity<List<Knjiga>> pretragaKnjigaZaNeregistrovanogKorisnika(HttpSession session) {
+        String pretragaKnjige = new String();
+        List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByNaslovOrderById(pretragaKnjige);
+        return ResponseEntity.ok(sveKnjigeUzPretragu);
+    }
 
     //Pregled profila drugih korisnika od strane neregistrovanog korisnika
 

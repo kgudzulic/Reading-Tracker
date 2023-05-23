@@ -113,6 +113,11 @@ public class KorisnikRestController {
     }
 
     //Pregled profila drugih korisnika od strane neregistrovanog korisnika
+    @PostMapping("/api/pregled-profila")
+    public ResponseEntity<List<Korisnik>> prikaziKorisnikaZaNeregistrovanogKorisnika(HttpSession session) {
+        List<Korisnik> sviKorisnici = korisnikService.getAll();
+        return ResponseEntity.ok(sviKorisnici);
+    }
 
     //Pregled recenzija knjiga od strane neregistrovanog korisnika
 

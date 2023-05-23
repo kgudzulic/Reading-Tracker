@@ -1,9 +1,13 @@
 package com.example.WebProjekat.service;
 
+import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class KorisnikService {
     @Autowired
@@ -19,4 +23,12 @@ public class KorisnikService {
             return null;
         return  korisnik;
     }
+
+    public List<Korisnik> getAll() {
+        return korisnikRepository.findAll();
+    }
+
+    /*public List<Korisnik> findByKorisnickoImeOrderByIme(String string) {
+        return korisnikRepository.findByKorisnickoImeOrderByIme(string);
+    }*/
 }

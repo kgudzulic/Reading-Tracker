@@ -134,7 +134,4 @@ public class KorisnikRestController {
         List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByZanrOrderById(pretragaKnjige);
         return ResponseEntity.ok(sveKnjigeUzPretragu);
     }
-
-    //Pregled recenzija knjiga od strane neregistrovanog korisnika
-
 }

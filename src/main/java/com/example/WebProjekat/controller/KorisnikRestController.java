@@ -1,7 +1,6 @@
 package com.example.WebProjekat.controller;
 
-import com.example.WebProjekat.dto.LoginDTO;
-import com.example.WebProjekat.dto.RegisterDTO;
+import com.example.WebProjekat.dto.*;
 import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;

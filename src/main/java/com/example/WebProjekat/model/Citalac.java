@@ -19,4 +19,6 @@ public class Citalac extends Korisnik implements Serializable {
     public Citalac() {
 
     }
+
+
 }

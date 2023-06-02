@@ -25,8 +25,8 @@ public class KorisnikRestController {
     @Autowired
     private KorisnikService korisnikService;
 
-    @Autowired
-    private KnjigaService knjigaService;
+    //@Autowired
+    //private KnjigaService knjigaService;
 
     @GetMapping("/api")
     public String welcome(){
@@ -100,7 +100,7 @@ public class KorisnikRestController {
     //Pregled svih knjiga od strane neregistrovanog korisnika
     @PostMapping("/api/pregled-knjiga")
     public ResponseEntity<List<Knjiga>> prikaziKnjige(HttpSession session) {
-        List<Knjiga> sveKnjige = knjigaService.findAll();
+        List<Knjiga> sveKnjige = korisnikService.findAllBooks();
         return ResponseEntity.ok(sveKnjige);
     }
 
@@ -108,14 +108,14 @@ public class KorisnikRestController {
     @PostMapping("/api/pregled-knjiga/pretraga-po-naslovu")
     public ResponseEntity<List<Knjiga>> pretragaKnjigaPoNaslovu(HttpSession session) {
         String pretragaKnjige = new String();
-        List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByNaslovOrderById(pretragaKnjige);
+        List<Knjiga> sveKnjigeUzPretragu = korisnikService.findAllByNaslovOrderById(pretragaKnjige);
         return ResponseEntity.ok(sveKnjigeUzPretragu);
     }
 
     //Pregled profila drugih korisnika od strane neregistrovanog korisnika
     @PostMapping("/api/pregled-profila")
     public ResponseEntity<List<Korisnik>> prikaziKorisnika(HttpSession session) {
-        List<Korisnik> sviKorisnici = korisnikService.findAll();
+        List<Korisnik> sviKorisnici = korisnikService.findAllUsers();
         return ResponseEntity.ok(sviKorisnici);
     }
 
@@ -131,7 +131,7 @@ public class KorisnikRestController {
     @PostMapping("/api/pregled-knjiga/pretraga-po-zanru")
     public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(HttpSession session) {
         String pretragaKnjige = new String();
-        List<Knjiga> sveKnjigeUzPretragu = knjigaService.findAllByZanrOrderById(pretragaKnjige);
+        List<Knjiga> sveKnjigeUzPretragu = korisnikService.findAllByZanrOrderById(pretragaKnjige);
         return ResponseEntity.ok(sveKnjigeUzPretragu);
     }
 }

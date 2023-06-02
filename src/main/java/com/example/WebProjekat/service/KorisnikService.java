@@ -13,6 +13,9 @@ public class KorisnikService {
     @Autowired
     private KorisnikRepository korisnikRepository;
 
+    @Autowired
+    private KnjigaService knjigaService;
+
     public Korisnik save(Korisnik korisnik) {
         return korisnikRepository.save(korisnik);
     }
@@ -24,11 +27,23 @@ public class KorisnikService {
         return  korisnik;
     }
 
-    public List<Korisnik> findAll() {
+    public List<Korisnik> findAllUsers() {
         return (List<Korisnik>) korisnikRepository.findAll();
     }
 
     public List<Korisnik> findAllByKorisnickoImeOrderByIme(String string) {
         return (List<Korisnik>) korisnikRepository.findAllByKorisnickoImeOrderByIme(string);
+    }
+
+    public List<Knjiga> findAllBooks(){
+        return knjigaService.findAll();
+    }
+
+    public List<Knjiga> findAllByNaslovOrderById(String string) {
+        return knjigaService.findAllByNaslovOrderById(string);
+    }
+
+    public List<Knjiga> findAllByZanrOrderById(String string) {
+        return knjigaService.findAllByZanrOrderById(string);
     }
 }

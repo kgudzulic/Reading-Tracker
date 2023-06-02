@@ -18,19 +18,19 @@ public class RegisterDTO {
 
     private Date datumRodjenja = new Date();
 
-    private Uloga uloga;
+    //private Uloga uloga;
 
     public RegisterDTO() {
     }
 
-    public RegisterDTO(String korisnickoIme, String lozinka, String ime, String prezime, String email, Date datumRodjenja, Uloga uloga) {
+    public RegisterDTO(String korisnickoIme, String lozinka, String ime, String prezime, String email, Date datumRodjenja/*, Uloga uloga*/) {
         this.korisnickoIme = korisnickoIme;
         this.lozinka = lozinka;
         this.ime = ime;
         this.prezime = prezime;
         this.email = email;
         this.datumRodjenja = datumRodjenja;
-        this.uloga = uloga;
+        //this.uloga = uloga;
     }
 
     public String getKorisnickoIme() {
@@ -81,11 +81,11 @@ public class RegisterDTO {
         this.datumRodjenja = datumRodjenja;
     }
 
-    public Uloga getUloga() {
+    /*public Uloga getUloga() {
         return uloga;
     }
 
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
-    }
+    }*/
 }

@@ -37,8 +37,8 @@ public class Korisnik implements Serializable {
     @Column
     private String opis;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Uloga uloga;
+    /*@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Uloga uloga;*/
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Polica> police = new HashSet<>();
@@ -60,7 +60,7 @@ public class Korisnik implements Serializable {
                 ", datumRodjenja=" + datumRodjenja +
                 ", profilnaSlika='" + profilnaSlika + '\'' +
                 ", opis='" + opis + '\'' +
-                ", uloga=" + uloga +
+                //", uloga=" + uloga +
                 ", police=" + police +
                 '}';
     }
@@ -132,13 +132,13 @@ public class Korisnik implements Serializable {
         this.opis = opis;
     }
 
-    public Uloga getUloga() {
+    /*public Uloga getUloga() {
         return uloga;
     }
 
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
-    }
+    }*/
 
     public Set<Polica> getPolice() {
         return police;

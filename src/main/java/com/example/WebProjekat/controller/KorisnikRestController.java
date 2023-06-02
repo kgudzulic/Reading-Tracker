@@ -44,7 +44,7 @@ public class KorisnikRestController {
         newKorisnik.setEmail(newDTO.getEmail());
         newKorisnik.setLozinka(newDTO.getLozinka());
         newKorisnik.setDatumRodjenja(newDTO.getDatumRodjenja());
-        newKorisnik.setUloga(newDTO.getUloga());
+        //newKorisnik.setUloga(newDTO.getUloga());
 
         Polica WTR = new Polica();
         WTR.setNaziv("Want to Read");

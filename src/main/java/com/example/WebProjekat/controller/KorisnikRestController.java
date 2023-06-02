@@ -25,9 +25,6 @@ public class KorisnikRestController {
     @Autowired
     private KorisnikService korisnikService;
 
-    //@Autowired
-    //private KnjigaService knjigaService;
-
     @GetMapping("/api")
     public String welcome(){
         return "Hello from api!";

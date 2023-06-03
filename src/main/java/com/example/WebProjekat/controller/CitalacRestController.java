@@ -16,6 +16,7 @@ public class CitalacRestController {
 
     @Autowired
     private CitalacService citalacService;
+
     @PostMapping("/api/citalac/dodaj_policu")
     public ResponseEntity<Polica> novaPolica(@RequestBody PolicaDTO policaDTO, HttpSession session){
         KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("CITALAC");

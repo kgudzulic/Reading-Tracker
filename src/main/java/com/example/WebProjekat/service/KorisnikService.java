@@ -51,5 +51,9 @@ public class KorisnikService {
         return knjigaService.findByZanr_Naziv(string);
     }
 
+    public Korisnik getByKorisnickoIme(String korisnickoIme){
+        return korisnikRepository.getBykorisnickoIme(korisnickoIme);
+    }
+
 
 }

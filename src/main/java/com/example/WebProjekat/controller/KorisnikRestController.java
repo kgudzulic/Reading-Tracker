@@ -116,8 +116,8 @@ public class KorisnikRestController {
 
     //Pretraga korisnika od strane neregistrovanog korisnika
     @GetMapping("/api/pregled-profila/pretraga")
-    public ResponseEntity<List<Korisnik>> pretragaKorisnika(@RequestParam("korisnickoIme") String korisnickoIme) {
-        return ResponseEntity.ok(korisnikService.findAllByKorisnickoImeOrderByIme(korisnickoIme));
+    public ResponseEntity<Korisnik> pretragaKorisnika(@RequestParam("korisnickoIme") String korisnickoIme) {
+        return ResponseEntity.ok(korisnikService.getByKorisnickoIme(korisnickoIme));
     }
 
     //Pretraga knjiga po zanru od strane neregistrovanog korisnika
@@ -125,4 +125,13 @@ public class KorisnikRestController {
     public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(@RequestParam("naziv") String zanr) {
         return ResponseEntity.ok(korisnikService.findByZanr_Naziv(zanr));
     }
+
+    //Podnosenje zahteva za aktivaciju autora
+    public ResponseEntity Za
+
+    //Pregled recenzija
+
+    //Pregled zanrova
+
+    //Pregled polica korisnika
 }

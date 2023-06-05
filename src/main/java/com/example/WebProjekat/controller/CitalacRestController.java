@@ -7,9 +7,12 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class CitalacRestController {
@@ -17,6 +20,7 @@ public class CitalacRestController {
     @Autowired
     private CitalacService citalacService;
 
+    //Dodavanje nove police
     @PostMapping("/api/citalac/dodaj_policu")
     public ResponseEntity<Polica> novaPolica(@RequestBody PolicaDTO policaDTO, HttpSession session){
         KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("CITALAC");
@@ -41,4 +45,6 @@ public class CitalacRestController {
         //u suprotnom, postoji polica sa tim nazivom pa se ne moze napraviti
         else return new ResponseEntity("Polica pod nazivom " + policaDTO.getNaziv() + " vec postoji.", HttpStatus.BAD_REQUEST);
     }
+
+    //Brisanje police
 }

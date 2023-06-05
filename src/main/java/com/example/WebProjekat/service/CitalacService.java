@@ -27,4 +27,8 @@ public class CitalacService {
     public Polica save(Polica polica) {
         return policaService.save(polica);
     }
+
+    public void deletePolicaByNaziv(String naziv){
+        policaService.deletePolicaByNaziv(naziv);
+    }
 }

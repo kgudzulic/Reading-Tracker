@@ -39,11 +39,17 @@ public class KorisnikService {
         return knjigaService.findAll();
     }
 
-    public List<Knjiga> findAllByNaslovOrderById(String string) {
-        return knjigaService.findAllByNaslovOrderById(string);
+    public List<Knjiga> findByNaslov(String string) {
+        return knjigaService.findByNaslov(string);
     }
 
-    public List<Knjiga> findAllByZanrOrderById(String string) {
-        return knjigaService.findAllByZanrOrderById(string);
+    public List<Knjiga> findAllByNaslov(String string) {
+        return knjigaService.findAllByNaslov(string);
     }
+
+    public List<Knjiga> findByZanr_Naziv(String string) {
+        return knjigaService.findByZanr_Naziv(string);
+    }
+
+
 }

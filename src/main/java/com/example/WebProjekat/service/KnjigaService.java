@@ -16,11 +16,14 @@ public class KnjigaService {
         return knjigaRepository.findAll();
     }
 
-    public List<Knjiga> findAllByNaslovOrderById(String string) {
-        return knjigaRepository.findAllByNaslovOrderById(string);
+    public List<Knjiga> findAllByNaslov(String string) {
+        return knjigaRepository.findAllByNaslov(string);
     }
 
-    public List<Knjiga> findAllByZanrOrderById(String string) {
-        return knjigaRepository.findAllByZanrOrderById(string);
+    public List<Knjiga> findByNaslov(String string) {
+        return knjigaRepository.findByNaslov(string);
+    }
+    public List<Knjiga> findByZanr_Naziv(String string) {
+        return knjigaRepository.findByZanr_Naziv(string);
     }
 }

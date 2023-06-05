@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +37,11 @@ public class KorisnikRestController {
         newKorisnik.setEmail(newDTO.getEmail());
         newKorisnik.setLozinka(newDTO.getLozinka());
         newKorisnik.setDatumRodjenja(newDTO.getDatumRodjenja());
-        //newKorisnik.setUloga(newDTO.getUloga());
+        if(newDTO.getUloga().getNaziv() != "citalac")
+        {
+            return "Jedino se mozete registrovati kao citalac.";
+        }
+        newKorisnik.setUloga(newDTO.getUloga());
 
         Polica WTR = new Polica();
         WTR.setNaziv("Want to Read");
@@ -94,37 +95,34 @@ public class KorisnikRestController {
     }
 
     //Pregled svih knjiga od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-knjiga")
+    @GetMapping("/api/pregled-knjiga")
     public ResponseEntity<List<Knjiga>> prikaziKnjige(HttpSession session) {
         List<Knjiga> sveKnjige = korisnikService.findAllBooks();
         return ResponseEntity.ok(sveKnjige);
     }
 
     //Pretraga knjiga od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-knjiga/pretraga-po-naslovu")
-    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoNaslovu(HttpSession session, String pretragaKnjige) {
-        List<Knjiga> sveKnjigeUzPretragu = korisnikService.findAllByNaslovOrderById(pretragaKnjige);
-        return ResponseEntity.ok(sveKnjigeUzPretragu);
+    @GetMapping("/api/pregled-knjiga/pretraga-naslov")
+    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoNaslovu(@RequestParam("naslov") String naslov) {
+        return ResponseEntity.ok(korisnikService.findByNaslov(naslov));
     }
 
     //Pregled profila drugih korisnika od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-profila")
+    @GetMapping("/api/pregled-profila")
     public ResponseEntity<List<Korisnik>> prikaziKorisnika(HttpSession session) {
         List<Korisnik> sviKorisnici = korisnikService.findAllUsers();
         return ResponseEntity.ok(sviKorisnici);
     }
 
     //Pretraga korisnika od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-profila/pretraga")
-    public ResponseEntity<List<Korisnik>> pretragaKorisnika(HttpSession session, String pretragaKorisnika) {
-        List<Korisnik> sviKorisniciUzPretragu = korisnikService.findAllByKorisnickoImeOrderByIme(pretragaKorisnika);
-        return ResponseEntity.ok(sviKorisniciUzPretragu);
+    @GetMapping("/api/pregled-profila/pretraga")
+    public ResponseEntity<List<Korisnik>> pretragaKorisnika(@RequestParam("korisnickoIme") String korisnickoIme) {
+        return ResponseEntity.ok(korisnikService.findAllByKorisnickoImeOrderByIme(korisnickoIme));
     }
 
     //Pretraga knjiga po zanru od strane neregistrovanog korisnika
-    @PostMapping("/api/pregled-knjiga/pretraga-po-zanru")
-    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(HttpSession session, String pretragaKnjige) {
-        List<Knjiga> sveKnjigeUzPretragu = korisnikService.findAllByZanrOrderById(pretragaKnjige);
-        return ResponseEntity.ok(sveKnjigeUzPretragu);
+    @GetMapping("/api/pregled-knjiga/pretraga-zanr")
+    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(@RequestParam("naziv") String zanr) {
+        return ResponseEntity.ok(korisnikService.findByZanr_Naziv(zanr));
     }
 }

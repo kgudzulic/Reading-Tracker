@@ -18,7 +18,7 @@ public class RegisterDTO {
 
     private Date datumRodjenja = new Date();
 
-    //private Uloga uloga;
+    private Uloga uloga;
 
     public RegisterDTO() {
     }
@@ -30,7 +30,7 @@ public class RegisterDTO {
         this.prezime = prezime;
         this.email = email;
         this.datumRodjenja = datumRodjenja;
-        //this.uloga = uloga;
+        this.uloga = uloga;
     }
 
     public String getKorisnickoIme() {
@@ -81,11 +81,11 @@ public class RegisterDTO {
         this.datumRodjenja = datumRodjenja;
     }
 
-    /*public Uloga getUloga() {
+    public Uloga getUloga() {
         return uloga;
     }
 
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
-    }*/
+    }
 }

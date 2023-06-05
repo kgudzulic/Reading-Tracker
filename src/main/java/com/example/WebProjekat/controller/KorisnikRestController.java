@@ -146,7 +146,13 @@ public class KorisnikRestController {
 
     //Pregled recenzija
 
+
     //Pregled zanrova
+    @GetMapping("/api/pregled-zanrova")
+    public ResponseEntity<List<Zanr>> prikazZanrova(HttpSession session) {
+        List<Zanr> sviZanrovi = korisnikService.findAll();
+        return ResponseEntity.ok(sviZanrovi);
+    }
 
     //Pregled polica korisnika
 }

@@ -3,6 +3,7 @@ package com.example.WebProjekat.service;
 import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.ZahtevAktivacijeAutora;
+import com.example.WebProjekat.model.Zanr;
 import com.example.WebProjekat.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ public class KorisnikService {
 
     @Autowired
     private KnjigaService knjigaService;
+
+    @Autowired
+    private ZanrService zanrService;
 
     @Autowired
     private  ZahtevAktivacijeAutoraService zahtevAktivacijeAutoraService;
@@ -61,5 +65,9 @@ public class KorisnikService {
 
     public ZahtevAktivacijeAutora save(ZahtevAktivacijeAutora zahtev) {
         return zahtevAktivacijeAutoraService.save(zahtev);
+    }
+
+    public List<Zanr> findAll(){
+        return zanrService.findAll();
     }
 }

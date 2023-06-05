@@ -27,4 +27,52 @@ public class ZahtevAktivacijeAutora implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Autor autor;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getPoruka() {
+        return poruka;
+    }
+
+    public void setPoruka(String poruka) {
+        this.poruka = poruka;
+    }
+
+    public Date getDatumZahteva() {
+        return datumZahteva;
+    }
+
+    public void setDatumZahteva(Date datumZahteva) {
+        this.datumZahteva = datumZahteva;
+    }
+
+    public StatusAktivacije getStatusAktivacije() {
+        return statusAktivacije;
+    }
+
+    public void setStatusAktivacije(StatusAktivacije statusAktivacije) {
+        this.statusAktivacije = statusAktivacije;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
 }

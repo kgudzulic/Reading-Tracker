@@ -1,7 +1,7 @@
 package com.example.WebProjekat.controller;
 
 import com.example.WebProjekat.dto.*;
-import com.example.WebProjekat.model.Knjiga;
+import com.example.WebProjekat.model.*;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
 import com.example.WebProjekat.service.KnjigaService;
@@ -127,7 +127,22 @@ public class KorisnikRestController {
     }
 
     //Podnosenje zahteva za aktivaciju autora
-    public ResponseEntity Za
+    // TO DO : potrebna validacija podataka da li postoji autor sa unetim podacima kom nalog nije aktivan
+    @PostMapping("/api/zahtev-aktivacije-autora")
+    public String zahtevAktivacije(@RequestBody ZahtevAktivacijeAutoraDTO newZahtevDTO) {
+
+        ZahtevAktivacijeAutora noviZahtev = new ZahtevAktivacijeAutora();
+        noviZahtev.setAutor(newZahtevDTO.getAutor());
+        noviZahtev.setEmail(newZahtevDTO.getEmail());
+        noviZahtev.setEmail(newZahtevDTO.getEmail());
+        noviZahtev.setPoruka(newZahtevDTO.getPoruka());
+        noviZahtev.setDatumZahteva(newZahtevDTO.getDatumZahteva());
+        noviZahtev.setTelefon(newZahtevDTO.getTelefon());
+
+        this.korisnikService.save(noviZahtev);
+
+        return "Zahtev za aktivaciju naloga autora" + noviZahtev.getAutor().getKorisnickoIme() + "je uspesno podnet.";
+    }
 
     //Pregled recenzija
 

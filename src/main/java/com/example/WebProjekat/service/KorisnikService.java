@@ -39,9 +39,6 @@ public class KorisnikService {
         return (List<Korisnik>) korisnikRepository.findAll();
     }
 
-    public List<Korisnik> findAllByKorisnickoImeOrderByIme(String string) {
-        return (List<Korisnik>) korisnikRepository.findAllByKorisnickoImeOrderByIme(string);
-    }
 
     public List<Knjiga> findAllBooks(){
         return knjigaService.findAll();
@@ -67,7 +64,7 @@ public class KorisnikService {
         return zahtevAktivacijeAutoraService.save(zahtev);
     }
 
-    public List<Zanr> findAll(){
+    public List<Zanr> findAllGenres(){
         return zanrService.findAll();
     }
 }

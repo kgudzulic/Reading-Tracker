@@ -22,6 +22,10 @@ public class PolicaService {
         return policaRepository.findAll();
     }
 
+    /*public List<Polica> findAllByKorisnik(Korisnik k){
+        return policaRepository.findAllByKorisnik(k);
+    }*/
+
     public Polica findByNaziv(String nazivPolice){
         return policaRepository.findByNaziv(nazivPolice);
     }

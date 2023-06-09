@@ -145,7 +145,11 @@ public class KorisnikRestController {
     }
 
     //Pregled recenzija
-
+    @GetMapping("/api/pregled-recenzija")
+    public ResponseEntity<List<Recenzija>> prikazRecenzija(HttpSession session) {
+        List<Recenzija> sverecenzije = korisnikService.findAllRecenzije();
+        return ResponseEntity.ok(sverecenzije);
+    }
 
     //Pregled zanrova
     @GetMapping("/api/pregled-zanrova")
@@ -154,5 +158,5 @@ public class KorisnikRestController {
         return ResponseEntity.ok(sviZanrovi);
     }
 
-    //Pregled polica korisnika
+
 }

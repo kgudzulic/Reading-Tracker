@@ -1,5 +1,6 @@
 package com.example.WebProjekat.repository;
 
+import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,5 +11,5 @@ public interface PolicaRepository extends JpaRepository<Polica, Long>{
 
     Polica findByNaziv(String nazivPolice);
 
-    List<Polica> findAll();
+    //List<Polica> findAllByKorisnik(Korisnik k);
 }

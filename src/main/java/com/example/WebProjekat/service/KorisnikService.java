@@ -40,7 +40,7 @@ public class KorisnikService {
 
     public List<Korisnik> findAllUsers() {
 
-        return (List<Korisnik>) korisnikRepository.findAll();
+        return korisnikRepository.findAll();
     }
 
     public List<Polica> findAllPolice() {

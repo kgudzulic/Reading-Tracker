@@ -10,4 +10,5 @@ public interface PolicaRepository extends JpaRepository<Polica, Long>{
 
     Polica findByNaziv(String nazivPolice);
 
+    List<Polica> findAll();
 }

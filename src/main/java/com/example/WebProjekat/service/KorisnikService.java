@@ -1,9 +1,6 @@
 package com.example.WebProjekat.service;
 
-import com.example.WebProjekat.model.Knjiga;
-import com.example.WebProjekat.model.Korisnik;
-import com.example.WebProjekat.model.ZahtevAktivacijeAutora;
-import com.example.WebProjekat.model.Zanr;
+import com.example.WebProjekat.model.*;
 import com.example.WebProjekat.repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +19,13 @@ public class KorisnikService {
     private ZanrService zanrService;
 
     @Autowired
-    private  ZahtevAktivacijeAutoraService zahtevAktivacijeAutoraService;
+    private ZahtevAktivacijeAutoraService zahtevAktivacijeAutoraService;
+
+    @Autowired
+    private PolicaService policaService;
+
+    @Autowired
+    private RecenzijaService recenzijaService;
 
     public Korisnik save(Korisnik korisnik) {
         return korisnikRepository.save(korisnik);
@@ -36,9 +39,17 @@ public class KorisnikService {
     }
 
     public List<Korisnik> findAllUsers() {
+
         return (List<Korisnik>) korisnikRepository.findAll();
     }
 
+    public List<Polica> findAllPolice() {
+        return policaService.findAll();
+    }
+
+    public List<Recenzija> findAllRecenzije() {
+        return recenzijaService.findAll();
+    }
 
     public List<Knjiga> findAllBooks(){
         return knjigaService.findAll();

@@ -25,8 +25,8 @@ public class Polica implements Serializable {
             inverseJoinColumns = @jakarta.persistence.JoinColumn(name = "stavkaPolice_id", referencedColumnName = "id"))
     private Set<StavkaPolice> stavkePolice = new HashSet<>();
 
-    /*@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Korisnik korisnik;*/
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Korisnik korisnik;
 
     public Polica() {
     }
@@ -53,5 +53,13 @@ public class Polica implements Serializable {
 
     public void setStavkePolice(Set<StavkaPolice> stavkePolice) {
         this.stavkePolice = stavkePolice;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
     }
 }

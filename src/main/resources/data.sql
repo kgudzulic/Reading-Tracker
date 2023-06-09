@@ -17,17 +17,18 @@ INSERT INTO ULOGA (naziv) VALUES ('administrator');
 
 
 /*Korisnici*/
-/*Citaoci*/
+    /*Citaoci*/
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2000-07-05', 'petar.markovic@gmail.com', 'Petar', 'Markovic', 'petar.markovic00', 'sifra1234!', 1);
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '1998-08-25', 'vasic.98@gmail.com', 'Anja', 'Vasic', 'anja.vasic98', 'sifra1234!', 1);
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2002-01-12', 'mara.j@yahoo.com', 'Mara', 'Jankovic', 'mara.jankovic02', 'sifra1234!', 1);
 --UPDATE KORISNIK SET dtype = 'CITALAC', datum_rodjenja = '1982-10-15', email = 'mika.miki@gmail.com', korisnicko_ime = 'mika.mikic82', lozinka = 'sifra1234!', uloga_id = 1 WHERE id = 7;
 
-/*Autori*/
+    /*Autori*/
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1947-09-21', 'stephen.king.author@gmail.com', 'Stephen', 'King', 'stephen.king47', 'sifra1234!', 2, true);
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1992-10-04', 'authorrupikaur@gmail.com', 'Rupi', 'Kaur', 'rupi.kaur92', 'sifra1234!', 2, true);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1972-06-04', 'author.joehill@gmail.com', 'Joe', 'Hill', 'joe.hill72', 'sifra1234!', 2, false);
 
-/*Administratori*/
+    /*Administratori*/
 INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('ADMINISTRATOR', '2000-04-15', 'panic.vaso@yahoo.com', 'Vasilije', 'Panic', 'vasilije.panic00', 'sifra1234!', 3);
 
 
@@ -105,6 +106,16 @@ INSERT INTO KNJIGA (naslov, naslovna_fotografija, ISBN, datum_objavljivanja, bro
 
 
 /*Police*/
+    /*Citalac id 3*/
+        /*WTR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_3', true);
+        /*CR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_3', true);
+        /*R*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Read_3', true);
+        /*Neprimarne*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_3', false);
+
     /*Citalac id 1*/
         /*WTR*/
 INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_1', true);
@@ -116,21 +127,11 @@ INSERT INTO POLICA (naziv, primarna) VALUES ('Read_1', true);
 INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_1', false);
 INSERT INTO POLICA (naziv, primarna) VALUES ('My recommendations_1', false);
 
-    /*Citalac id 3*/
-        /*WTR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_3', true);
-        /*CR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_3', true);
-        /*R*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Read_3', true);
-        /*Neprimarne*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_3', false);
-
 
 /*Zahtevi aktivacije autora*/
+INSERT INTO ZAHTEV_AKTIVACIJE_AUTORA (autor_id, datum_zahteva, status_aktivacije_id, email, poruka, telefon) VALUES (6, '2023-06-08', 1, 'author.joehill@gmail.com', 'Molimo potvrdite zahtev za aktivaciju', '123456789');
 
-
-/*Recenzije*/
+    /*Recenzije*/
     /*Citalac id 3*/
         /*za The Notebook*/
 INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2020-05-13', 3, 'Well, i was promised tears and, unfortunately, my eyes are as dry as the sahara.', 3);
@@ -161,8 +162,33 @@ INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (3, 4);
 INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (4, 1);
 INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (4, 4);
 
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (7, 5);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (9, 5);
+
 
 /*Korisnik_police*/
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (1, 5);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (1, 6);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (1, 7);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (1, 8);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (1, 9);
+
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (3, 1);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (3, 2);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (3, 3);
+INSERT INTO KORISNIK_POLICE (korisnik_id, police_id) VALUES (3, 4);
 
 
 /*Korisnik tj autor_spisak_knjiga*/
+    /*Stephen King*/
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (4, 1);
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (4, 2);
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (4, 3);
+
+    /*Rupi Kaur*/
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (5, 25);
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (5, 26);
+
+    /*Joe Hill*/
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (6, 4);
+INSERT INTO KORISNIK_SPISAK_KNJIGA (autor_id, spisak_knjiga_id) VALUES (6, 5);

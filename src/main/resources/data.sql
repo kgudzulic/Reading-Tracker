@@ -10,6 +10,27 @@ INSERT INTO ZANR (naziv) VALUES ('Psiholoski');
 INSERT INTO ZANR (naziv) VALUES ('Poezija');
 
 
+/*Uloge*/
+INSERT INTO ULOGA (naziv) VALUES ('citalac');
+INSERT INTO ULOGA (naziv) VALUES ('autor');
+INSERT INTO ULOGA (naziv) VALUES ('administrator');
+
+
+/*Korisnici*/
+/*Citaoci*/
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2000-07-05', 'petar.markovic@gmail.com', 'Petar', 'Markovic', 'petar.markovic00', 'sifra1234!', 1);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '1998-08-25', 'vasic.98@gmail.com', 'Anja', 'Vasic', 'anja.vasic98', 'sifra1234!', 1);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2002-01-12', 'mara.j@yahoo.com', 'Mara', 'Jankovic', 'mara.jankovic02', 'sifra1234!', 1);
+--UPDATE KORISNIK SET dtype = 'CITALAC', datum_rodjenja = '1982-10-15', email = 'mika.miki@gmail.com', korisnicko_ime = 'mika.mikic82', lozinka = 'sifra1234!', uloga_id = 1 WHERE id = 7;
+
+/*Autori*/
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1947-09-21', 'stephen.king.author@gmail.com', 'Stephen', 'King', 'stephen.king47', 'sifra1234!', 2, true);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1992-10-04', 'authorrupikaur@gmail.com', 'Rupi', 'Kaur', 'rupi.kaur92', 'sifra1234!', 2, true);
+
+/*Administratori*/
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('ADMINISTRATOR', '2000-04-15', 'panic.vaso@yahoo.com', 'Vasilije', 'Panic', 'vasilije.panic00', 'sifra1234!', 3);
+
+
 /*Statusi aktivacije*/
 INSERT INTO STATUS_AKTIVACIJE (naziv) VALUES ('na cekanju');
 INSERT INTO STATUS_AKTIVACIJE (naziv) VALUES ('odobren');
@@ -84,46 +105,64 @@ INSERT INTO KNJIGA (naslov, naslovna_fotografija, ISBN, datum_objavljivanja, bro
 
 
 /*Police*/
+    /*Citalac id 1*/
+        /*WTR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_1', true);
+        /*CR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_1', true);
+        /*R*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Read_1', true);
+        /*Neprimarne*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_1', false);
+INSERT INTO POLICA (naziv, primarna) VALUES ('My recommendations_1', false);
 
-
-/*Stavke police*/
+    /*Citalac id 3*/
+        /*WTR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_3', true);
+        /*CR*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_3', true);
+        /*R*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Read_3', true);
+        /*Neprimarne*/
+INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_3', false);
 
 
 /*Zahtevi aktivacije autora*/
 
 
 /*Recenzije*/
-    /*Citalac id 1*/
-        /*za Carrie*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2017-09-12', 4, 'I think that it is the best testimony to Stephen Kings genius in this, his very first novel (the first to be published but in reality the fourth that he wrote).', 1);
-        /*za Gone Girl*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2013-12-05', 5, 'Quite simply, this is one of the best novels of the year. It is a thriller in the best tradition of Alfred Hitchcock and layered with brilliantly written characters; it is the kind of book that is nearly impossible to put down.', 1);
-
     /*Citalac id 3*/
         /*za The Notebook*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, citalac_id) VALUES ('2020-05-13', 3, 'Well, i was promised tears and, unfortunately, my eyes are as dry as the sahara.', 3);
+INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2020-05-13', 3, 'Well, i was promised tears and, unfortunately, my eyes are as dry as the sahara.', 3);
         /*za Gone Girl*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2012-08-12', 5, 'This book was just way too much fun – and I mean that in a good way. I’m taking a leisurely drive down the garden path of the story, when BAM – right in the middle it makes a u-turn and we are on the damn highway doing 90 miles an hour (commonly referred to as a plot twist). Sweet Mother of Mercy!', 3);
+INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2012-08-12', 5, 'I am taking a leisurely drive down the garden path of the story, when BAM – right in the middle it makes a u-turn and we are on the damn highway doing 90 miles an hour', 3);
         /*za Frida*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2019-05-10', 2, 'This is not an accurate portrayal of Frida''s life. She was more of a revolutionary than this book makes her out to be. She was also a gender-bending feminist, and a brilliant painter. Herrera makes her out to be a Diego obsessed, pain obsessed sack of potatoes, and i''m not buying it.', 3);
+INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2019-05-10', 2, 'She was more of a revolutionary than this book makes her out to be. She was also a gender-bending feminist, and a brilliant painter.', 3);
         /*za Carrie*/
---INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst) VALUES ('2021-02-11', 4, 'This remarkable epistolary debut novel by King. When first published it was ahead of its time, and still feels pertinent today. In this work there are so many brave choices for a debut novelist';
-
-/*Uloge*/
-INSERT INTO ULOGA (naziv) VALUES ('citalac');
-INSERT INTO ULOGA (naziv) VALUES ('autor');
-INSERT INTO ULOGA (naziv) VALUES ('administrator');
+INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2021-02-11', 4, 'This remarkable epistolary debut novel by King. When first published it was ahead of its time, and still feels pertinent today. In this work there are so many brave choices for a debut novelist', 3);
+    /*Citalac id 1*/
+        /*Za Carrie*/
+INSERT INTO RECENZIJA (datum_recenzije, ocena, tekst, korisnik_id) VALUES ('2023-05-14', 5, 'Carrie, the debut novel by the legendary Stephen King, remains a timeless classic that delves deep into the dark and twisted realms of the human psyche.', 1);
 
 
-/*Korisnici*/
-    /*Citaoci*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2000-07-05', 'petar.markovic@gmail.com', 'Petar', 'Markovic', 'petar.markovic00', 'sifra1234!', 1);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '1998-08-25', 'vasic.98@gmail.com', 'Anja', 'Vasic', 'anja.vasic98', 'sifra1234!', 1);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2002-01-12', 'mara.j@yahoo.com', 'Mara', 'Jankovic', 'mara.jankovic02', 'sifra1234!', 1);
+/*Stavke police*/
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (10, 1);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (6, 2);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (16, 3);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (2, 4);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (2, 5);
 
-    /*Autori*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1947-09-21', 'stephen.king.author@gmail.com', 'Stephen', 'King', 'stephen.king47', 'sifra1234!', 2, true);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1992-10-04', 'authorrupikaur@gmail.com', 'Rupi', 'Kaur', 'rupi.kaur92', 'sifra1234!', 2, true);
 
-    /*Administratori*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('ADMINISTRATOR', '2000-04-15', 'panic.vaso@yahoo.com', 'Vasilije', 'Panic', 'vasilije.panic00', 'sifra1234!', 3);
+/*Pripada*/
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (2, 3);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (3, 1);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (3, 2);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (3, 4);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (4, 1);
+INSERT INTO PRIPADA (polica_id, stavka_police_id) VALUES (4, 4);
+
+
+/*Korisnik_police*/
+
+
+/*Korisnik tj autor_spisak_knjiga*/

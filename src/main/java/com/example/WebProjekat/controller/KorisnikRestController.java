@@ -41,15 +41,15 @@ public class KorisnikRestController {
         newKorisnik.setUloga(EnumUloga.CITALAC);
 
         Polica WTR = new Polica();
-        WTR.setNaziv("Want to Read_" + newKorisnik.getId());
+        WTR.setNaziv("Want to Read_" + newKorisnik.getKorisnickoIme());
         WTR.setPrimarna(true);
 
         Polica CR = new Polica();
-        CR.setNaziv("Currently Reading_" + newKorisnik.getId());
+        CR.setNaziv("Currently Reading_" + newKorisnik.getKorisnickoIme());
         CR.setPrimarna(true);
 
         Polica R = new Polica();
-        R.setNaziv("Read_" + newKorisnik.getId());
+        R.setNaziv("Read_" + newKorisnik.getKorisnickoIme());
         R.setPrimarna(true);
 
         Set<Polica> pocetnePolice = new HashSet<>();
@@ -61,7 +61,7 @@ public class KorisnikRestController {
 
         this.korisnikService.save(newKorisnik);
 
-        return "Korisnik" + newDTO.getKorisnickoIme() + "je uspesno registrovan.";
+        return "Korisnik " + newDTO.getKorisnickoIme() + " je uspesno registrovan.";
     }
 
     //Login korisnika

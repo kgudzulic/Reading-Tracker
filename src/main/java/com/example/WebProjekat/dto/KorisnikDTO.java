@@ -16,6 +16,8 @@ public class KorisnikDTO {
 
     private String prezime;
 
+    private String korisnickoIme;
+
     private Date datumRodjenja;
 
     private EnumUloga uloga;
@@ -25,20 +27,13 @@ public class KorisnikDTO {
     public KorisnikDTO() {
     }
 
-    public KorisnikDTO(String ime, String prezime, Date datumRodjenja, EnumUloga uloga, Set<Polica> police) {
+    public KorisnikDTO(String ime, String prezime, String korisnickoIme, Date datumRodjenja, EnumUloga uloga, Set<Polica> police) {
         this.ime = ime;
         this.prezime = prezime;
+        this.korisnickoIme = korisnickoIme;
         this.datumRodjenja = datumRodjenja;
         this.uloga = uloga;
         this.police = police;
-    }
-
-    public KorisnikDTO(Korisnik korisnik) {
-        this.ime = korisnik.getIme();
-        this.prezime = korisnik.getPrezime();
-        this.datumRodjenja = korisnik.getDatumRodjenja();
-        this.uloga = korisnik.getUloga();
-        this.police = korisnik.getPolice();
     }
 
     public String getIme() {
@@ -55,6 +50,14 @@ public class KorisnikDTO {
 
     public void setPrezime(String prezime) {
         this.prezime = prezime;
+    }
+
+    public String getKorisnickoIme() {
+        return korisnickoIme;
+    }
+
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
     }
 
     public Date getDatumRodjenja() {
@@ -79,13 +82,5 @@ public class KorisnikDTO {
 
     public void setPolice(Set<Polica> police) {
         this.police = police;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

@@ -23,8 +23,8 @@ public class CitalacRestController {
     //Dodavanje nove police
     @PostMapping("/api/citalac/dodaj_policu")
     public ResponseEntity<Polica> novaPolica(@RequestBody PolicaDTO policaDTO, HttpSession session){
-        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("korisnik");
-
+        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("Korisnik");
+        policaDTO.setNaziv(policaDTO.getNaziv() + ulogovaniKorisnik.getKorisnickoIme());
         if(ulogovaniKorisnik == null){
             return new ResponseEntity("Niste ulogovani.", HttpStatus.BAD_REQUEST);
         }
@@ -36,7 +36,7 @@ public class CitalacRestController {
             Polica newPolica = new Polica();
             newPolica.setNaziv(policaDTO.getNaziv());
             newPolica.setPrimarna(false);
-            newPolica.setStavkePolice(policaDTO.getStavkePolice());
+            newPolica.setStavkePolice(null);
 
             this.citalacService.save(newPolica);
 

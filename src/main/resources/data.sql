@@ -108,24 +108,24 @@ INSERT INTO KNJIGA (naslov, naslovna_fotografija, ISBN, datum_objavljivanja, bro
 /*Police*/
     /*Citalac id 3*/
         /*WTR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_3', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_mara.jankovic02', true);
         /*CR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_3', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_mara.jankovic02', true);
         /*R*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Read_3', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Read_mara.jankovic02', true);
         /*Neprimarne*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_3', false);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_mara.jankovic02', false);
 
     /*Citalac id 1*/
         /*WTR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_1', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Want to Read_petar.markovic00', true);
         /*CR*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_1', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Currently Reading_petar.markovic00', true);
         /*R*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Read_1', true);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Read_petar.markovic00', true);
         /*Neprimarne*/
-INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_1', false);
-INSERT INTO POLICA (naziv, primarna) VALUES ('My recommendations_1', false);
+INSERT INTO POLICA (naziv, primarna) VALUES ('Favorites_petar.markovic00', false);
+INSERT INTO POLICA (naziv, primarna) VALUES ('My recommendations_petar.markovic00', false);
 
 
 /*Zahtevi aktivacije autora*/

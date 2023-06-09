@@ -154,6 +154,4 @@ public class KorisnikRestController {
         List<Zanr> sviZanrovi = korisnikService.findAllGenres();
         return ResponseEntity.ok(sviZanrovi);
     }
-
-
 }

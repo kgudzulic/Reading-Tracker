@@ -29,16 +29,16 @@ public class AdministratorRestController {
 
     @PostMapping("/api/administrator/create-autor")
     public ResponseEntity<Korisnik> kreirajAutora(@RequestBody RegisterDTO newDTO, HttpSession session) {
-        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("Korisnik");
+        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("korisnik");
 
         if(ulogovaniKorisnik == null){
             return new ResponseEntity("Niste ulogovani.", HttpStatus.BAD_REQUEST);
         }
-        if(ulogovaniKorisnik.getUloga() != EnumUloga.CITALAC){
+        if(ulogovaniKorisnik.getUloga() != EnumUloga.ADMINISTRATOR){
             return new ResponseEntity("Dodavanje police nije moguce, neispravna uloga.", HttpStatus.BAD_REQUEST);
         }
 
-        Autor newKorisnik = new Autor();
+        Korisnik newKorisnik = new Korisnik();
         newKorisnik.setIme(newDTO.getIme());
         newKorisnik.setPrezime(newDTO.getPrezime());
         newKorisnik.setKorisnickoIme(newDTO.getKorisnickoIme());

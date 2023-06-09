@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 @Entity
-@DiscriminatorValue("AUTOR")
+//@DiscriminatorValue("AUTOR")
 public class Autor extends Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +37,11 @@ public class Korisnik implements Serializable {
     @Column
     private String opis;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Uloga uloga;
+    /*@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Uloga uloga;*/
+
+    @Enumerated(EnumType.STRING)
+    protected EnumUloga uloga;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Polica> police = new HashSet<>();
@@ -132,11 +135,11 @@ public class Korisnik implements Serializable {
         this.opis = opis;
     }
 
-    public Uloga getUloga() {
+    public EnumUloga getUloga() {
         return uloga;
     }
 
-    public void setUloga(Uloga uloga) {
+    public void setUloga(EnumUloga uloga) {
         this.uloga = uloga;
     }
 
@@ -146,5 +149,9 @@ public class Korisnik implements Serializable {
 
     public void setPolice(Set<Polica> police) {
         this.police = police;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

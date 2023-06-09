@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 @Entity
-@DiscriminatorValue("ADMINISTRATOR")
+//@DiscriminatorValue("ADMINISTRATOR")
 public class Administrator extends Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

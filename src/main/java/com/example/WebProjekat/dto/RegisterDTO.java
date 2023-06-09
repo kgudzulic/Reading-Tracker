@@ -88,4 +88,6 @@ public class RegisterDTO {
     public void setUloga(Uloga uloga) {
         this.uloga = uloga;
     }
+
+
 }

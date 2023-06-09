@@ -1,5 +1,6 @@
 package com.example.WebProjekat.dto;
 
+import com.example.WebProjekat.model.EnumUloga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
 import com.example.WebProjekat.model.Uloga;
@@ -17,14 +18,14 @@ public class KorisnikDTO {
 
     private Date datumRodjenja;
 
-    private Uloga uloga;
+    private EnumUloga uloga;
 
     private Set<Polica> police = new HashSet<>();
 
     public KorisnikDTO() {
     }
 
-    public KorisnikDTO(String ime, String prezime, Date datumRodjenja, Uloga uloga, Set<Polica> police) {
+    public KorisnikDTO(String ime, String prezime, Date datumRodjenja, EnumUloga uloga, Set<Polica> police) {
         this.ime = ime;
         this.prezime = prezime;
         this.datumRodjenja = datumRodjenja;
@@ -64,11 +65,11 @@ public class KorisnikDTO {
         this.datumRodjenja = datumRodjenja;
     }
 
-    public Uloga getUloga() {
+    public EnumUloga getUloga() {
         return uloga;
     }
 
-    public void setUloga(Uloga uloga) {
+    public void setUloga(EnumUloga uloga) {
         this.uloga = uloga;
     }
 
@@ -78,5 +79,13 @@ public class KorisnikDTO {
 
     public void setPolice(Set<Polica> police) {
         this.police = police;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@DiscriminatorValue("CITALAC")
+//@DiscriminatorValue("CITALAC")
 public class Citalac extends Korisnik implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +15,6 @@ public class Citalac extends Korisnik implements Serializable {
         super(ime, prezime);
         this.id = id;
     }
-
-
 
     public Citalac() {
 

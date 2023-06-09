@@ -31,28 +31,25 @@ public class KorisnikRestController {
     public String registrujKorisnika(@RequestBody RegisterDTO newDTO) {
 
         Korisnik newKorisnik = new Korisnik();
+
         newKorisnik.setIme(newDTO.getIme());
         newKorisnik.setPrezime(newDTO.getPrezime());
         newKorisnik.setKorisnickoIme(newDTO.getKorisnickoIme());
         newKorisnik.setEmail(newDTO.getEmail());
         newKorisnik.setLozinka(newDTO.getLozinka());
         newKorisnik.setDatumRodjenja(newDTO.getDatumRodjenja());
-        if(newDTO.getUloga().getNaziv() != "citalac")
-        {
-            return "Jedino se mozete registrovati kao citalac.";
-        }
-        newKorisnik.setUloga(newDTO.getUloga());
+        newKorisnik.setUloga(EnumUloga.CITALAC);
 
         Polica WTR = new Polica();
-        WTR.setNaziv("Want to Read");
+        WTR.setNaziv("Want to Read_" + newKorisnik.getId());
         WTR.setPrimarna(true);
 
         Polica CR = new Polica();
-        CR.setNaziv("Currently Reading");
+        CR.setNaziv("Currently Reading_" + newKorisnik.getId());
         CR.setPrimarna(true);
 
         Polica R = new Polica();
-        R.setNaziv("Read");
+        R.setNaziv("Read_" + newKorisnik.getId());
         R.setPrimarna(true);
 
         Set<Polica> pocetnePolice = new HashSet<>();

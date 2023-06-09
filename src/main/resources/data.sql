@@ -18,18 +18,18 @@ INSERT INTO ULOGA (naziv) VALUES ('administrator');
 
 /*Korisnici*/
     /*Citaoci*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2000-07-05', 'petar.markovic@gmail.com', 'Petar', 'Markovic', 'petar.markovic00', 'sifra1234!', 1);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '1998-08-25', 'vasic.98@gmail.com', 'Anja', 'Vasic', 'anja.vasic98', 'sifra1234!', 1);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('CITALAC', '2002-01-12', 'mara.j@yahoo.com', 'Mara', 'Jankovic', 'mara.jankovic02', 'sifra1234!', 1);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga) VALUES ('CITALAC', '2000-07-05', 'petar.markovic@gmail.com', 'Petar', 'Markovic', 'petar.markovic00', 'sifra1234!', 'CITALAC');
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga) VALUES ('CITALAC', '1998-08-25', 'vasic.98@gmail.com', 'Anja', 'Vasic', 'anja.vasic98', 'sifra1234!', 'CITALAC');
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga) VALUES ('CITALAC', '2002-01-12', 'mara.j@yahoo.com', 'Mara', 'Jankovic', 'mara.jankovic02', 'sifra1234!', 'CITALAC');
 --UPDATE KORISNIK SET dtype = 'CITALAC', datum_rodjenja = '1982-10-15', email = 'mika.miki@gmail.com', korisnicko_ime = 'mika.mikic82', lozinka = 'sifra1234!', uloga_id = 1 WHERE id = 7;
 
     /*Autori*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1947-09-21', 'stephen.king.author@gmail.com', 'Stephen', 'King', 'stephen.king47', 'sifra1234!', 2, true);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1992-10-04', 'authorrupikaur@gmail.com', 'Rupi', 'Kaur', 'rupi.kaur92', 'sifra1234!', 2, true);
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id, aktivan) VALUES ('AUTOR', '1972-06-04', 'author.joehill@gmail.com', 'Joe', 'Hill', 'joe.hill72', 'sifra1234!', 2, false);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga, aktivan) VALUES ('AUTOR', '1947-09-21', 'stephen.king.author@gmail.com', 'Stephen', 'King', 'stephen.king47', 'sifra1234!', 'AUTOR', true);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga, aktivan) VALUES ('AUTOR', '1992-10-04', 'authorrupikaur@gmail.com', 'Rupi', 'Kaur', 'rupi.kaur92', 'sifra1234!', 'AUTOR', true);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga, aktivan) VALUES ('AUTOR', '1972-06-04', 'author.joehill@gmail.com', 'Joe', 'Hill', 'joe.hill72', 'sifra1234!', 'AUTOR', false);
 
     /*Administratori*/
-INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga_id) VALUES ('ADMINISTRATOR', '2000-04-15', 'panic.vaso@yahoo.com', 'Vasilije', 'Panic', 'vasilije.panic00', 'sifra1234!', 3);
+INSERT INTO KORISNIK (dtype, datum_rodjenja, email, ime, prezime, korisnicko_ime, lozinka, uloga) VALUES ('ADMINISTRATOR', '2000-04-15', 'panic.vaso@yahoo.com', 'Vasilije', 'Panic', 'vasilije.panic00', 'sifra1234!', 'ADMINISTRATOR');
 
 
 /*Statusi aktivacije*/

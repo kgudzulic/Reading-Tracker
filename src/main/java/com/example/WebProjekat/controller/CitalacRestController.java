@@ -23,12 +23,12 @@ public class CitalacRestController {
     //Dodavanje nove police
     @PostMapping("/api/citalac/dodaj_policu")
     public ResponseEntity<Polica> novaPolica(@RequestBody PolicaDTO policaDTO, HttpSession session){
-        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("CITALAC");
+        KorisnikDTO ulogovaniKorisnik = (KorisnikDTO) session.getAttribute("korisnik");
 
         if(ulogovaniKorisnik == null){
-            return new ResponseEntity("Citalac nije ulogovan.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity("Niste ulogovani.", HttpStatus.BAD_REQUEST);
         }
-        if(ulogovaniKorisnik.getUloga().getNaziv() != citalacService.getUlogaByNaziv("CITALAC")){
+        if(ulogovaniKorisnik.getUloga() != EnumUloga.CITALAC){
             return new ResponseEntity("Dodavanje police nije moguce, neispravna uloga.", HttpStatus.BAD_REQUEST);
         }
         //jednako praznom stringu, znaci da ne postoji vec polica sa tim imenom, znaci moze da se napravi nova polica sa tim nazivom

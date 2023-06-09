@@ -19,6 +19,13 @@ public class Recenzija implements Serializable {
     @Column
     private Date datumRecenzije;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Korisnik korisnik;
+
+    public Recenzija(Integer ocena, String tekst, Date datumRecenzije, Korisnik korisnik) {
+        this.ocena = ocena;
+        this.tekst = tekst;
+        this.datumRecenzije = datumRecenzije;
+        this.korisnik = korisnik;
+    }
 }

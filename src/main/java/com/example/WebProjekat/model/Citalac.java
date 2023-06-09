@@ -16,6 +16,8 @@ public class Citalac extends Korisnik implements Serializable {
         this.id = id;
     }
 
+
+
     public Citalac() {
 
     }

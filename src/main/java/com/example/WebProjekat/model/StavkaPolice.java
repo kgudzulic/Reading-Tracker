@@ -1,5 +1,6 @@
 package com.example.WebProjekat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,8 +18,31 @@ public class StavkaPolice implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Knjiga knjiga;
 
-    /*
-    //drugi deo many to many tabele izmedju stavki police i same police
     @ManyToMany(mappedBy = "stavkePolice")
-    private Set<Polica> police = new HashSet<>();*/
+    @JsonIgnore
+    private Set<Polica> police = new HashSet<>();
+
+    public Recenzija getRecenzija() {
+        return recenzija;
+    }
+
+    public void setRecenzija(Recenzija recenzija) {
+        this.recenzija = recenzija;
+    }
+
+    public Knjiga getKnjiga() {
+        return knjiga;
+    }
+
+    public void setKnjiga(Knjiga knjiga) {
+        this.knjiga = knjiga;
+    }
+
+    public Set<Polica> getPolice() {
+        return police;
+    }
+
+    public void setPolice(Set<Polica> police) {
+        this.police = police;
+    }
 }

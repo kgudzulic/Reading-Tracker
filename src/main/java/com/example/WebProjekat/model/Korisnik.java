@@ -1,5 +1,6 @@
 package com.example.WebProjekat.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -44,6 +45,7 @@ public class Korisnik implements Serializable {
     protected EnumUloga uloga;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Polica> police = new HashSet<>();
 
     public Korisnik(String ime, String prezime) {

@@ -28,4 +28,39 @@ public class Recenzija implements Serializable {
         this.datumRecenzije = datumRecenzije;
         this.korisnik = korisnik;
     }
+
+    public Recenzija() {
+    }
+
+    public Integer getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(Integer ocena) {
+        this.ocena = ocena;
+    }
+
+    public String getTekst() {
+        return tekst;
+    }
+
+    public void setTekst(String tekst) {
+        this.tekst = tekst;
+    }
+
+    public Date getDatumRecenzije() {
+        return datumRecenzije;
+    }
+
+    public void setDatumRecenzije(Date datumRecenzije) {
+        this.datumRecenzije = datumRecenzije;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 }

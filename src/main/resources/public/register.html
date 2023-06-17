@@ -1,10 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
 
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Goodreads</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Prijava</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Registracija</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Knjige</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Registration</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="ime">First Name</label>
+            <input type="text" class="form-control" id="ime" name="ime" required>
+        </div>
+        <div class="form-group">
+            <label for="prezime">Last Name</label>
+            <input type="text" class="form-control" id="prezime" name="prezime" required>
+        </div>
+        <div class="form-group">
+            <label for="korisnickoIme">Username</label>
+            <input type="text" class="form-control" id="korisnickoIme" name="korisnickoIme" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="lozinka">Password</label>
+            <input type="password" class="form-control" id="lozinka" name="lozinka" required>
+        </div>
+        <div class="form-group">
+            <label for="datumRodjenja">Date of Birth</label>
+            <input type="date" class="form-control" id="datumRodjenja" name="datumRodjenja" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var registrationForm = document.getElementById('registrationForm');
+
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var ime = document.getElementById('ime').value;
+            var prezime = document.getElementById('prezime').value;
+            var korisnickoIme = document.getElementById('korisnickoIme').value;
+            var email = document.getElementById('email').value;
+            var lozinka = document.getElementById('lozinka').value;
+            var datumRodjenja = document.getElementById('datumRodjenja').value;
+
+            fetch('/api/autentikacija/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ime: ime,
+                    prezime: prezime,
+                    korisnickoIme: korisnickoIme,
+                    email: email,
+                    lozinka: lozinka,
+                    datumRodjenja: datumRodjenja
+                })
+            })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {
+                    console.log(data);
+                    // Handle success response
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    // Handle error response
+                });
+        });
+    });
+</script>
 </body>
+
 </html>

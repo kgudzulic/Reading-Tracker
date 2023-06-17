@@ -1,10 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
-<body>
 
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Goodreads</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Prijava</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Registracija</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Knjige</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container mt-4">
+    <h2>Books</h2>
+    <form id="searchForm" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by Title">
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Publication Date</th>
+            <th scope="col">Number of Pages</th>
+            <th scope="col">Description</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Average Rating</th>
+        </tr>
+        </thead>
+        <tbody id="booksTableBody"></tbody>
+    </table>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchForm = document.getElementById('searchForm');
+        var searchInput = document.getElementById('searchInput');
+        var booksTableBody = document.getElementById('booksTableBody');
+
+
+        function dobaviPodatke(){
+            var naslov = searchInput.value;
+
+            fetch('/api/knjige?naslov=' + encodeURIComponent(naslov))
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {
+                    booksTableBody.innerHTML = ''; // Clear previous table data
+
+                    data.forEach(function(book) {
+                        var row = document.createElement('tr');
+                        row.innerHTML = `
+                        <td>${book.naslov}</td>
+                        <td>${book.isbn}</td>
+                        <td>${book.datumObjavljivanja}</td>
+                        <td>${book.brojStrana}</td>
+                        <td>${book.opis}</td>
+                        <td>${book.zanr.naziv}</td>
+                        <td>${book.srednjaOcena}</td>
+                      `;
+                        booksTableBody.appendChild(row);
+                    });
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    // Handle error response
+                });
+
+        }
+
+        dobaviPodatke();
+
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            dobaviPodatke();
+
+
+
+        });
+    });
+</script>
 </body>
+
 </html>

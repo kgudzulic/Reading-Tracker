@@ -3,129 +3,33 @@ package com.example.WebProjekat.controller;
 import com.example.WebProjekat.dto.*;
 import com.example.WebProjekat.model.*;
 import com.example.WebProjekat.model.Korisnik;
-import com.example.WebProjekat.model.Polica;
-import com.example.WebProjekat.service.KnjigaService;
 import com.example.WebProjekat.service.KorisnikService;
+import com.example.WebProjekat.service.PolicaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("api/korisnici")
 public class KorisnikRestController {
     @Autowired
     private KorisnikService korisnikService;
 
-    @GetMapping("/api")
-    public String welcome(){
-        return "Hello from api!";
-    }
+    @Autowired
+    private PolicaService policaService;
 
-    //Registracija korisnika
-    @PostMapping("/api/register")
-    public String registrujKorisnika(@RequestBody RegisterDTO newDTO) {
 
-        Korisnik newKorisnik = new Korisnik();
-
-        newKorisnik.setIme(newDTO.getIme());
-        newKorisnik.setPrezime(newDTO.getPrezime());
-        newKorisnik.setKorisnickoIme(newDTO.getKorisnickoIme());
-        newKorisnik.setEmail(newDTO.getEmail());
-        newKorisnik.setLozinka(newDTO.getLozinka());
-        newKorisnik.setDatumRodjenja(newDTO.getDatumRodjenja());
-        newKorisnik.setUloga(EnumUloga.CITALAC);
-
-        Polica WTR = new Polica();
-        WTR.setNaziv("Want to Read_" + newKorisnik.getKorisnickoIme());
-        WTR.setPrimarna(true);
-
-        Polica CR = new Polica();
-        CR.setNaziv("Currently Reading_" + newKorisnik.getKorisnickoIme());
-        CR.setPrimarna(true);
-
-        Polica R = new Polica();
-        R.setNaziv("Read_" + newKorisnik.getKorisnickoIme());
-        R.setPrimarna(true);
-
-        Set<Polica> pocetnePolice = new HashSet<>();
-        pocetnePolice.add(WTR);
-        pocetnePolice.add(CR);
-        pocetnePolice.add(R);
-
-        newKorisnik.setPolice(pocetnePolice);
-
-        this.korisnikService.save(newKorisnik);
-
-        return "Korisnik " + newDTO.getKorisnickoIme() + " je uspesno registrovan.";
-    }
-
-    //Login korisnika
-    @PostMapping("/api/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDto, HttpSession session) {
-        //provera ispravnosti podataka
-        if(loginDto.getKorisnickoIme().isEmpty() || loginDto.getLozinka().isEmpty())
-            return new ResponseEntity("Polje ne sme biti prazno!", HttpStatus.BAD_REQUEST);
-
-        Korisnik ulogovaniKorisnik = korisnikService.login(loginDto.getKorisnickoIme(), loginDto.getLozinka());
-        if (ulogovaniKorisnik == null)
-            return new ResponseEntity<>("Korisnik sa unetim podacima ne postoji!", HttpStatus.NOT_FOUND);
-
-        session.setAttribute("korisnik", ulogovaniKorisnik);
-        return ResponseEntity.ok("Korisnik " + ulogovaniKorisnik.getKorisnickoIme() + " je uspesno ulogovan.");
-    }
-
-    //Logout korisnika
-    @PostMapping("/api/logout")
-    public ResponseEntity Logout(HttpSession session){
-        Korisnik ulogovaniKorisnik = (Korisnik) session.getAttribute("korisnik");
-
-        if (ulogovaniKorisnik == null)
-            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
-
-        session.invalidate();
-        return new ResponseEntity("Uspesno ste se izlogovali", HttpStatus.OK);
-    }
-
-    //Pregled svih knjiga od strane neregistrovanog korisnika
-    @GetMapping("/api/pregled-knjiga")
-    public ResponseEntity<List<Knjiga>> prikaziKnjige(HttpSession session) {
-        List<Knjiga> sveKnjige = korisnikService.findAllBooks();
-        return ResponseEntity.ok(sveKnjige);
-    }
-
-    //Pretraga knjiga od strane neregistrovanog korisnika
-    @GetMapping("/api/pregled-knjiga/pretraga-naslov")
-    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoNaslovu(@RequestParam("naslov") String naslov) {
-        return ResponseEntity.ok(korisnikService.findByNaslov(naslov));
-    }
-
-    //Pregled profila drugih korisnika od strane neregistrovanog korisnika
-    @GetMapping("/api/pregled-profila")
-    public ResponseEntity<List<Korisnik>> prikaziKorisnika(HttpSession session) {
-        List<Korisnik> sviKorisnici = korisnikService.findAllUsers();
+    @GetMapping
+    public ResponseEntity<List<Korisnik>> get(HttpSession session) {
+        List<Korisnik> sviKorisnici = korisnikService.findAll();
         return ResponseEntity.ok(sviKorisnici);
     }
 
-    //Pretraga korisnika od strane neregistrovanog korisnika
-    @GetMapping("/api/pregled-profila/pretraga")
-    public ResponseEntity<Korisnik> pretragaKorisnika(@RequestParam("korisnickoIme") String korisnickoIme) {
-        return ResponseEntity.ok(korisnikService.getByKorisnickoIme(korisnickoIme));
-    }
-
-    //Pretraga knjiga po zanru od strane neregistrovanog korisnika
-    @GetMapping("/api/pregled-knjiga/pretraga-zanr")
-    public ResponseEntity<List<Knjiga>> pretragaKnjigaPoZanru(@RequestParam("naziv") String zanr) {
-        return ResponseEntity.ok(korisnikService.findByZanr_Naziv(zanr));
-    }
-
-    //Podnosenje zahteva za aktivaciju autora
-    // TO DO : potrebna validacija podataka da li postoji autor sa unetim podacima kom nalog nije aktivan
-    @PostMapping("/api/zahtev-aktivacije-autora")
+    @PostMapping("/zahtev-aktivacije-autora")
     public String zahtevAktivacije(@RequestBody ZahtevAktivacijeAutoraDTO newZahtevDTO) {
 
         ZahtevAktivacijeAutora noviZahtev = new ZahtevAktivacijeAutora();
@@ -141,17 +45,83 @@ public class KorisnikRestController {
         return "Zahtev za aktivaciju naloga autora" + noviZahtev.getAutor().getKorisnickoIme() + "je uspesno podnet.";
     }
 
-    //Pregled recenzija
-    @GetMapping("/api/pregled-recenzija")
-    public ResponseEntity<List<Recenzija>> prikazRecenzija(HttpSession session) {
-        List<Recenzija> sverecenzije = korisnikService.findAllRecenzije();
-        return ResponseEntity.ok(sverecenzije);
+    @GetMapping("{id}")
+    public ResponseEntity<Korisnik> getUser(@PathVariable long id){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            return ResponseEntity.ok(korisnik);
+        }
+        return ResponseEntity.notFound().build();
     }
 
-    //Pregled zanrova
-    @GetMapping("/api/pregled-zanrova")
-    public ResponseEntity<List<Zanr>> prikazZanrova(HttpSession session) {
-        List<Zanr> sviZanrovi = korisnikService.findAllGenres();
-        return ResponseEntity.ok(sviZanrovi);
+    @PutMapping("{id}")
+    public ResponseEntity<Korisnik> updateUser(@RequestBody IzmenaProfilaDTO izmenaProfilaDTO, @PathVariable long id){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            korisnik.setIme(izmenaProfilaDTO.getIme());
+            korisnik.setPrezime(izmenaProfilaDTO.getPrezime());
+            korisnik.setDatumRodjenja(izmenaProfilaDTO.getDatumRodjenja());
+            korisnik.setOpis(izmenaProfilaDTO.getOpis());
+            korisnik.setProfilnaSlika(izmenaProfilaDTO.getSlika());
+            korisnikService.save(korisnik);
+            return ResponseEntity.ok(korisnik);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("{id}/email")
+    public ResponseEntity<Korisnik> updateUserEmail(@RequestBody IzmenaEmailDTO izmenaEmailDTO, @PathVariable long id){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            if( !korisnik.getLozinka().equals(izmenaEmailDTO.getStaraLozinka())){
+                return  ResponseEntity.badRequest().build();
+            }
+            korisnik.setEmail(izmenaEmailDTO.getEmail());
+            return ResponseEntity.ok(korisnik);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("{id}/password")
+    public ResponseEntity<Korisnik> updateUserPsssword(@RequestBody IzmenaLozinkeDTO izmenaLozinkeDTO, @PathVariable long id){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            if(!izmenaLozinkeDTO.getLozinka().equals(izmenaLozinkeDTO.getLozinkaPotvrda())  || !korisnik.getLozinka().equals(izmenaLozinkeDTO.getStaraLozinka())){
+                return  ResponseEntity.badRequest().build();
+            }
+            korisnik.setLozinka(izmenaLozinkeDTO.getLozinka());
+            return ResponseEntity.ok(korisnik);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("{id}/police")
+    public ResponseEntity<List<Polica>> getPoliceByUser(@PathVariable long id){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            List<Polica> police = policaService.findByKorisnik(korisnik);
+            return ResponseEntity.ok(police);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("{id}/police")
+    public ResponseEntity<Polica> postPolicAByUser(@PathVariable long id, @RequestBody PolicaDTO policaDTO){
+        Optional<Korisnik> optionalKorisnik = korisnikService.findById(id);
+        if(optionalKorisnik.isPresent()){
+            Korisnik korisnik = optionalKorisnik.get();
+            Polica polica = new Polica();
+            polica.setNaziv(policaDTO.getNaziv());
+            polica.setPrimarna(false);
+            polica.setKorisnik(korisnik);
+            Polica savedPolica = policaService.save(polica);
+            return ResponseEntity.ok(savedPolica);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

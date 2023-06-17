@@ -22,6 +22,14 @@ public class StavkaPolice implements Serializable {
     @JsonIgnore
     private Set<Polica> police = new HashSet<>();
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Recenzija getRecenzija() {
         return recenzija;
     }

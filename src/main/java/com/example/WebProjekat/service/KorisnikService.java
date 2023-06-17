@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class KorisnikService {
@@ -77,5 +78,13 @@ public class KorisnikService {
 
     public List<Zanr> findAllGenres(){
         return zanrService.findAll();
+    }
+
+    public List<Korisnik> findAll() {
+        return korisnikRepository.findAll();
+    }
+
+    public Optional<Korisnik> findById(long id) {
+        return korisnikRepository.findById(id);
     }
 }

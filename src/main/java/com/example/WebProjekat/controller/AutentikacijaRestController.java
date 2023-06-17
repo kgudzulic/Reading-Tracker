@@ -1,6 +1,7 @@
 package com.example.WebProjekat.controller;
 
 import com.example.WebProjekat.dto.LoginDTO;
+import com.example.WebProjekat.dto.LoginResponseDTO;
 import com.example.WebProjekat.dto.RegisterDTO;
 import com.example.WebProjekat.model.EnumUloga;
 import com.example.WebProjekat.model.Korisnik;
@@ -63,17 +64,21 @@ public class AutentikacijaRestController {
 
     //Login korisnika
     @PostMapping("login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDto, HttpSession session) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDto, HttpSession session) {
         //provera ispravnosti podataka
         if(loginDto.getKorisnickoIme().isEmpty() || loginDto.getLozinka().isEmpty())
             return new ResponseEntity("Polje ne sme biti prazno!", HttpStatus.BAD_REQUEST);
 
         Korisnik ulogovaniKorisnik = korisnikService.login(loginDto.getKorisnickoIme(), loginDto.getLozinka());
         if (ulogovaniKorisnik == null)
-            return new ResponseEntity<>("Korisnik sa unetim podacima ne postoji!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         session.setAttribute("korisnik", ulogovaniKorisnik);
-        return ResponseEntity.ok("Korisnik " + ulogovaniKorisnik.getKorisnickoIme() + " je uspesno ulogovan.");
+        LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+        loginResponseDTO.setIdKorisnika(ulogovaniKorisnik.getId());
+        loginResponseDTO.setUloga(ulogovaniKorisnik.getUloga().name());
+
+        return ResponseEntity.ok(loginResponseDTO);
     }
 
     //Logout korisnika

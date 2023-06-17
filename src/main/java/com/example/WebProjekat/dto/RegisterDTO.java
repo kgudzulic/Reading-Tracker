@@ -5,7 +5,6 @@ import com.example.WebProjekat.model.Uloga;
 import java.util.Date;
 
 public class RegisterDTO {
-
     private String ime;
 
     private String prezime;
@@ -16,9 +15,9 @@ public class RegisterDTO {
 
     private String lozinka;
 
-    private Date datumRodjenja = new Date();
+    private String lozinkaPotvrda;
 
-    private Uloga uloga;
+    private Date datumRodjenja = new Date();
 
     public RegisterDTO() {
     }
@@ -30,7 +29,6 @@ public class RegisterDTO {
         this.prezime = prezime;
         this.email = email;
         this.datumRodjenja = datumRodjenja;
-        this.uloga = uloga;
     }
 
     public String getKorisnickoIme() {
@@ -81,13 +79,11 @@ public class RegisterDTO {
         this.datumRodjenja = datumRodjenja;
     }
 
-    public Uloga getUloga() {
-        return uloga;
+    public String getLozinkaPotvrda() {
+        return lozinkaPotvrda;
     }
 
-    public void setUloga(Uloga uloga) {
-        this.uloga = uloga;
+    public void setLozinkaPotvrda(String lozinkaPotvrda) {
+        this.lozinkaPotvrda = lozinkaPotvrda;
     }
-
-
 }

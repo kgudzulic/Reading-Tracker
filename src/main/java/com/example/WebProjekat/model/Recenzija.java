@@ -19,7 +19,8 @@ public class Recenzija implements Serializable {
     @Column
     private Date datumRecenzije;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Korisnik korisnik;
 
     public Recenzija(Integer ocena, String tekst, Date datumRecenzije, Korisnik korisnik) {
@@ -29,7 +30,16 @@ public class Recenzija implements Serializable {
         this.korisnik = korisnik;
     }
 
-    public Recenzija() {
+    public Recenzija(){
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getOcena() {

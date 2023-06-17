@@ -99,4 +99,12 @@ public class Knjiga implements Serializable {
     public void setSrednjaOcena(Float srednjaOcena) {
         this.srednjaOcena = srednjaOcena;
     }
+
+    public String getNaslovnaFotografija() {
+        return naslovnaFotografija;
+    }
+
+    public void setNaslovnaFotografija(String naslovnaFotografija) {
+        this.naslovnaFotografija = naslovnaFotografija;
+    }
 }

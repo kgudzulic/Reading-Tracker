@@ -28,6 +28,16 @@ public class KnjigaRestController {
         return ResponseEntity.ok(knjigaService.findByNaslovIgnoreCaseContaining(naslov));
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<Knjiga> getBookById(@PathVariable long id){
+        Optional<Knjiga> knjigaOptional = knjigaService.findById(id);
+        if(knjigaOptional.isPresent()){
+            return ResponseEntity.ok(knjigaOptional.get());
+
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("{id}/recenzije")
     public ResponseEntity<List<Recenzija>> get(@PathVariable long id){
 

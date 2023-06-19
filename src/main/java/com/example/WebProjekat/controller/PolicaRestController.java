@@ -31,6 +31,15 @@ public class PolicaRestController {
     @Autowired
     StavkaPoliceService stavkaPoliceService;
 
+    @GetMapping("{id}")
+    public ResponseEntity<Polica> getPolicaById(@PathVariable long id){
+        Optional<Polica> optionalPolica = policaService.findById(id);
+        if(optionalPolica.isPresent()){
+            return ResponseEntity.ok(optionalPolica.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity deletePolica(@PathVariable long id){
         Optional<Polica> optionalPolica = policaService.findById(id);
@@ -40,7 +49,7 @@ public class PolicaRestController {
                 policaService.delete(polica);
                 return ResponseEntity.ok().build();
             }
-            else {
+            else{
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
             }
         }

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Menu</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Goodreads</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/login.html">Prijava</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register.html">Registracija</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/knjige.html">Knjige</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/police.html">Police</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/korisnici.html">Korisnici</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+
+<div class="container mt-4">
+  <h2>Polica: <span id="nazivPolice"></span></h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Publication Date</th>
+      <th scope="col">Number of Pages</th>
+      <th scope="col">Description</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Average Rating</th>
+      <th scope="col">Opcije</th>
+    </tr>
+    </thead>
+    <tbody id="booksTableBody"></tbody>
+  </table>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+
+
+    function dobaviPodatke(){
+      var policaId = localStorage.getItem("policaId");
+
+      fetch('/api/police/'+policaId)
+              .then(function(response) {
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  throw new Error('Error: ' + response.status);
+                }
+              })
+              .then(function(data) {
+                document.getElementById("nazivPolice").innerHTML = data.naziv;
+                booksTableBody.innerHTML = ''; // Clear previous table data
+
+                data.stavkePolice.forEach(function(stavkaPolice) {
+                  var book = stavkaPolice.knjiga;
+                  var row = document.createElement('tr');
+                  row.innerHTML = `
+                    <td>${book.naslov}</td>
+                    <td>${book.isbn}</td>
+                    <td>${book.datumObjavljivanja}</td>
+                    <td>${book.brojStrana}</td>
+                    <td>${book.opis}</td>
+                    <td>${book.zanr.naziv}</td>
+                    <td>${book.srednjaOcena}</td>
+                  `;
+                  booksTableBody.appendChild(row);
+                });
+
+
+              })
+              .catch(function(error) {
+                console.error(error);
+                // Handle error response
+              });
+
+
+
+    }
+
+
+    dobaviPodatke();
+
+
+
+
+  });
+</script>
+</body>
+
+</html>

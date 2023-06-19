@@ -18,17 +18,24 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">Prijava</a>
+                <a class="nav-link" href="/login.html">Prijava</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Registracija</a>
+                <a class="nav-link" href="/register.html">Registracija</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Knjige</a>
+                <a class="nav-link" href="/knjige.html">Knjige</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/police.html">Police</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/korisnici.html">Korisnici</a>
             </li>
         </ul>
     </div>
 </nav>
+
 
 <div class="container mt-4">
     <h2>Login</h2>
@@ -71,16 +78,17 @@
             })
                 .then(function(response) {
                     if (response.ok) {
-                        var data = response.json();
-                        localStorage.setItem("idKorisnika", data.idKorisnika);
                         return response.json();
                     } else {
                         throw new Error('Error: ' + response.status);
                     }
                 })
                 .then(function(data) {
-                    console.log(data);
-                    // Handle success response
+                    localStorage.setItem("idKorisnika", data.idKorisnika);
+                    window.location.href = 'police.html';
+
+
+
                 })
                 .catch(function(error) {
                     console.error(error);

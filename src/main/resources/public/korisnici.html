@@ -17,24 +17,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/login.html">Prijava</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register.html">Registracija</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/knjige.html">Knjige</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/police.html">Police</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/korisnici.html">Korisnici</a>
-            </li>
+
         </ul>
     </div>
 </nav>
+
 
 
 
@@ -78,8 +65,26 @@
               <td>${user.email}</td>
               <td>${user.lozinka}</td>
               <td>${user.opis}</td>
+              <td><button name="policeButton" data-korisnikid=${user.id}>Police</button></td>
             `;
                     usersTableBody.appendChild(row);
+
+
+                    var buttons = document.getElementsByName("policeButton");
+                    buttons.forEach(function(button) {
+                        button.addEventListener('click', function(e) {
+                            e.preventDefault(); // Prevent the default link behavior (navigation)
+
+                            // Get the data from the clicked row
+                            var korisnikId = button.dataset.korisnikid;
+
+
+                            localStorage.setItem('idKorisnikaPolice', korisnikId);
+
+                            // Redirect to the details page
+                            window.location.href = 'police.html';
+                        });
+                    });
                 });
             })
             .catch(function(error) {

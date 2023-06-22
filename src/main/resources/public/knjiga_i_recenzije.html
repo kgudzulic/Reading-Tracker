@@ -12,32 +12,57 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Goodreads</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onload="dobaviPolice();">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/login.html">Prijava</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/register.html">Registracija</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/knjige.html">Knjige</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/police.html">Police</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/korisnici.html">Korisnici</a>
-      </li>
+
     </ul>
   </div>
 </nav>
 
+<!-- Button to trigger the modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Modal Title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <h2>Police</h2>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Polica</th>
+            <th scope="col"></th>
+
+
+          </tr>
+          </thead>
+          <tbody id="policeBody"></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container mt-4">
   <h2>Book Details</h2>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Dodaj u listu
+  </button>
   <table class="table">
     <thead>
     <tr>
@@ -68,7 +93,57 @@
 </div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="js/navigation.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
+
+  function promenaCheckbox(checkbox){
+    var bookId = localStorage.getItem('bookId');
+    var policaId = checkbox.dataset.policaid;
+    if(checkbox.checked){
+      console.log("čekirano");
+      console.log(checkbox.dataset.policaid);
+    }
+    else{
+      console.log("nije čekirano");
+    }
+
+  }
+
+
+  function dobaviPolice(){
+    var bookId = localStorage.getItem('bookId');
+    var policeBody = document.getElementById('policeBody');
+    policeBody.innerHTML = "";
+
+    fetch('/api/knjige/' + bookId + '/police')
+            .then(function(response) {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Error: ' + response.status);
+              }
+            })
+            .then(function(police) {
+              police.forEach(function(polica) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+              <td>${polica.naziv}</td>
+              <td><input type='checkbox' data-policaid='${polica.id}' onchange='promenaCheckbox(this)' ${polica.sadrzi ? 'checked':''}></td>
+            `;
+                policeBody.appendChild(row);
+              });
+            })
+            .catch(function(error) {
+              console.error(error);
+              // Handle error response
+            });
+  }
+
+
+
   document.addEventListener('DOMContentLoaded', function() {
     var bookId = localStorage.getItem('bookId');
     var bookDetailsBody = document.getElementById('bookDetailsBody');
@@ -126,6 +201,11 @@
               console.error(error);
               // Handle error response
             });
+
+
+
+    dobaviPolice();
+
   });
 </script>
 </body>

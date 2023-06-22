@@ -1,14 +1,17 @@
 package com.example.WebProjekat.service;
 
+import com.example.WebProjekat.dto.PolicaKnjigaDTO;
 import com.example.WebProjekat.model.Knjiga;
 import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Polica;
+import com.example.WebProjekat.model.StavkaPolice;
 import com.example.WebProjekat.repository.PolicaRepository;
 import com.example.WebProjekat.repository.StavkaPoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +59,25 @@ public class PolicaService {
 
     public boolean postojiKnjigaNaPrimarnojPolici( Korisnik korisnik,  Knjiga knjiga){
         return stavkaPoliceRepository.postojiKnjigaNaPrimarnojPolici(korisnik, knjiga);
+    }
+
+    public List<PolicaKnjigaDTO> sadrziKnjigu(Korisnik korisnik, Knjiga knjiga) {
+        List<PolicaKnjigaDTO> policeKnjigaDTO = new ArrayList<>();
+
+        List<Polica> police = findByKorisnik(korisnik);
+        for(Polica polica: police) {
+            boolean sadrzi = false;
+
+            for (StavkaPolice stavka : polica.getStavkePolice()) {
+                if (stavka.getKnjiga().getId().equals(knjiga.getId())) {
+                    sadrzi = true; // Found a matching Knjiga in the Polica
+                    break;
+                }
+            }
+            policeKnjigaDTO.add(new PolicaKnjigaDTO(polica.getId(), polica.getNaziv(), sadrzi));
+        }
+
+        return policeKnjigaDTO;
     }
 }
 

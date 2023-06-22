@@ -1,10 +1,14 @@
 package com.example.WebProjekat.controller;
 
+import com.example.WebProjekat.dto.PolicaKnjigaDTO;
 import com.example.WebProjekat.model.Knjiga;
+import com.example.WebProjekat.model.Korisnik;
 import com.example.WebProjekat.model.Recenzija;
 import com.example.WebProjekat.model.StavkaPolice;
 import com.example.WebProjekat.service.KnjigaService;
+import com.example.WebProjekat.service.PolicaService;
 import com.example.WebProjekat.service.RecenzijaService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,6 +25,9 @@ public class KnjigaRestController {
 
     @Autowired
     RecenzijaService recenzijaService;
+
+    @Autowired
+    PolicaService policaService;
 
     @GetMapping
     public ResponseEntity<List<Knjiga>> get(@RequestParam(required = false) String naslov){
@@ -45,6 +52,18 @@ public class KnjigaRestController {
         if(optionalKnjiga.isPresent()){
             Knjiga knjiga = optionalKnjiga.get();
             return ResponseEntity.ok(recenzijaService.findAllRecenzijaByKnjiga(knjiga));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("{id}/police")
+    public ResponseEntity<List<PolicaKnjigaDTO>> getPolice(@PathVariable long id, HttpSession session){
+
+        Optional<Knjiga> optionalKnjiga = knjigaService.findById(id);
+        if(optionalKnjiga.isPresent()){
+            Knjiga knjiga = optionalKnjiga.get();
+            Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+            return ResponseEntity.ok(policaService.sadrziKnjigu(korisnik, knjiga));
         }
         return ResponseEntity.notFound().build();
     }

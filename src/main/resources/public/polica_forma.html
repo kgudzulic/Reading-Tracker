@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Goodreads</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>Dodavanje nove police</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="naziv">Naziv</label>
+            <input type="text" class="form-control" id="naziv" name="naziv" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Dodaj</button>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="js/navigation.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var registrationForm = document.getElementById('registrationForm');
+        var idKorisnika = localStorage.getItem("idKorisnika");
+
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var naziv = document.getElementById('naziv').value;
+
+            fetch('/api/korisnici/'+idKorisnika+'/police', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    naziv: naziv
+
+                })
+            })
+                .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Error: ' + response.status);
+                    }
+                })
+                .then(function(data) {
+                    console.log(data);
+                    window.location.href = 'police.html';
+                    // Handle success response
+                })
+                .catch(function(error) {
+                    console.error(error);
+                    // Handle error response
+                });
+        });
+    });
+</script>
+</body>
+
+</html>

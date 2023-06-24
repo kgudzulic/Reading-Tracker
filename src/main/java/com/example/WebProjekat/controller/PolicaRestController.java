@@ -110,6 +110,20 @@ public class PolicaRestController {
 
     // TODO ruta za brisanje stavke police sa police
 
+    @DeleteMapping("{policaId}/knjige/{knjigaId}")
+    public ResponseEntity<?> delete(@PathVariable long policaId, @PathVariable long knjigaId){
+        Optional<Polica> optionalPolica =policaService.findById(policaId);
+        if(optionalPolica.isPresent()) {
+            Optional<Knjiga> optionalKnjiga = knjigaService.findById(knjigaId);
+            if(optionalKnjiga.isEmpty()){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            policaService.otkloniKnjiguSaPolice(optionalPolica.get(), optionalKnjiga.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     // dodavanje stavkePolice na odredjenu stavku
 
     @PostMapping("{policaId}/stavke-police/{stavkaPoliceId}")

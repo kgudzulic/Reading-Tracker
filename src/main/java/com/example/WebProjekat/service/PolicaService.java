@@ -1,11 +1,9 @@
 package com.example.WebProjekat.service;
 
 import com.example.WebProjekat.dto.PolicaKnjigaDTO;
-import com.example.WebProjekat.model.Knjiga;
-import com.example.WebProjekat.model.Korisnik;
-import com.example.WebProjekat.model.Polica;
-import com.example.WebProjekat.model.StavkaPolice;
+import com.example.WebProjekat.model.*;
 import com.example.WebProjekat.repository.PolicaRepository;
+import com.example.WebProjekat.repository.RecenzijaRepository;
 import com.example.WebProjekat.repository.StavkaPoliceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +21,9 @@ public class PolicaService {
 
     @Autowired
     private StavkaPoliceRepository stavkaPoliceRepository;
+
+    @Autowired
+    private RecenzijaRepository recenzijaRepository;
 
     public void deletePolicaByNaziv(String naziv){
         policaRepository.deletePolicaByNaziv(naziv);
@@ -78,6 +79,22 @@ public class PolicaService {
         }
 
         return policeKnjigaDTO;
+    }
+
+    public void otkloniKnjiguSaPolice(Polica polica, Knjiga knjiga){
+        for(StavkaPolice stavkaPolice: polica.getStavkePolice()){
+            if(stavkaPolice.getKnjiga().getId() == knjiga.getId()){
+                if(polica.getNaziv().equals("Read")){
+                    Recenzija recenzija = stavkaPolice.getRecenzija();
+                    stavkaPolice.setRecenzija(null);
+                    stavkaPoliceRepository.save(stavkaPolice);
+                    recenzijaRepository.delete(recenzija);
+                }
+                polica.getStavkePolice().remove(stavkaPolice);
+                break;
+            }
+        }
+        save(polica);
     }
 }
 

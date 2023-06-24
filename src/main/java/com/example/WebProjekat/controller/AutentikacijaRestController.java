@@ -25,6 +25,7 @@ public class AutentikacijaRestController {
     @Autowired
     private KorisnikService korisnikService;
 
+    // Registracija korisnika
     @PostMapping("register")
     public Korisnik registrujKorisnika(@RequestBody RegisterDTO newDTO) {
 
@@ -39,16 +40,19 @@ public class AutentikacijaRestController {
         newKorisnik.setUloga(EnumUloga.CITALAC);
 
         Polica WTR = new Polica();
-        WTR.setNaziv("Want to Read_" + newKorisnik.getKorisnickoIme());
+        WTR.setNaziv("Want to Read");
         WTR.setPrimarna(true);
+        WTR.setKorisnik(newKorisnik);
 
         Polica CR = new Polica();
-        CR.setNaziv("Currently Reading_" + newKorisnik.getKorisnickoIme());
+        CR.setNaziv("Currently Reading");
         CR.setPrimarna(true);
+        CR.setKorisnik(newKorisnik);
 
         Polica R = new Polica();
-        R.setNaziv("Read_" + newKorisnik.getKorisnickoIme());
+        R.setNaziv("Read");
         R.setPrimarna(true);
+        R.setKorisnik(newKorisnik);
 
         Set<Polica> pocetnePolice = new HashSet<>();
         pocetnePolice.add(WTR);
@@ -62,7 +66,7 @@ public class AutentikacijaRestController {
         return newKorisnik;
     }
 
-    //Login korisnika
+    // Login korisnika
     @PostMapping("login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDto, HttpSession session) {
         //provera ispravnosti podataka
@@ -81,7 +85,7 @@ public class AutentikacijaRestController {
         return ResponseEntity.ok(loginResponseDTO);
     }
 
-    //Logout korisnika
+    // Logout korisnika
     @PostMapping("logout")
     public ResponseEntity Logout(HttpSession session){
         Korisnik ulogovaniKorisnik = (Korisnik) session.getAttribute("korisnik");

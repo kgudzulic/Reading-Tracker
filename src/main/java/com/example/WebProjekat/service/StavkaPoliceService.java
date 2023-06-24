@@ -23,4 +23,8 @@ public class StavkaPoliceService {
     public void delete(StavkaPolice stavkaPolice) {
         stavkaPoliceRepository.delete(stavkaPolice);
     }
+
+    public StavkaPolice save(StavkaPolice stavkaPolice) {
+        return stavkaPoliceRepository.save(stavkaPolice);
+    }
 }
